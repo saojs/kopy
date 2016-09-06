@@ -33,9 +33,6 @@
     "semicolon": false,
     "space": 2
   },
-  "kanpai": {
-    "test": "test2"
-  },
   "dependencies": {
     "async": "^2.0.1",
     "consolidate": "^0.14.1",
