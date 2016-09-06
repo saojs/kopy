@@ -1,6 +1,6 @@
 {
   "name": "graceful-copy",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Gracefully copy a directory with templates.",
   "license": "MIT",
   "repository": "egoist/graceful-copy",
@@ -17,7 +17,9 @@
     "build": "bubleup"
   },
   "watch": {
-    "./src": ["build"]
+    "./src": [
+      "build"
+    ]
   },
   "files": [
     "index.js"
