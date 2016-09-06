@@ -13,9 +13,8 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "xo src/*.js && rm -rf test/dest && ava",
-    "build": "bubleup",
-    "test2": "npm run build && npm test"
+    "test": "npm run build && xo src/*.js && rm -rf test/dest && ava",
+    "build": "bubleup"
   },
   "watch": {
     "./src": ["build"]
