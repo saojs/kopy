@@ -1,0 +1,6 @@
+{
+  "name": "{{ name }}",{{#if has}}
+  "has": true,{{/if}}{{#unless hasNot}}
+  "hasNot": false{{/unless}}
+}
+

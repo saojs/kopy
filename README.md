@@ -1,0 +1,66 @@
+# graceful-copy
+
+[![NPM version](https://img.shields.io/npm/v/graceful-copy.svg?style=flat-square)](https://npmjs.com/package/graceful-copy) [![NPM downloads](https://img.shields.io/npm/dm/graceful-copy.svg?style=flat-square)](https://npmjs.com/package/graceful-copy) [![Build Status](https://img.shields.io/circleci/project/egoist/graceful-copy/master.svg?style=flat-square)](https://circleci.com/gh/egoist/graceful-copy)
+
+> Gracefully copy a directory with templates.
+
+## Install
+
+```bash
+$ npm install --save graceful-copy
+```
+
+## Usage
+
+```js
+const copy = require('graceful-copy')
+
+copy({
+  src: './template',
+  dest: './dest',
+  data: {
+    foo: 'bar'
+  }
+}, err => {
+  if (err) return console.log(err)
+
+  console.log('done!')
+})
+```
+
+## Templates
+
+Templates could use [handlebars](http://handlebarsjs.com/) syntax.
+
+## API
+
+### options: object
+
+#### src: string
+
+Source directory. Could be a relative or absolute path.
+
+#### dest: string
+
+Destination directory.
+
+#### clean: boolean
+
+Whether to clean destination directory before writing to it. Defaults to `true`.
+
+#### cwd: string
+
+Current working directory. Defaults to `process.cwd()`.
+
+#### data: object
+
+The data to render templates in source directory.
+
+### callback: function
+
+---
+
+**graceful-copy** © [EGOIST](https://github.com/egoist), Released under the [MIT](https://egoist.mit-license.org/) License.<br>
+Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/graceful-copy/contributors)).
+
+> [egoistian.com](https://egoistian.com) · GitHub [@egoist](https://github.com/egoist) · Twitter [@rem_rin_rin](https://twitter.com/rem_rin_rin)
