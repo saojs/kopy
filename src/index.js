@@ -11,7 +11,7 @@ export default function gracefulCopy({
   clean = true
 } = {}, cb) {
   const source = path.resolve(cwd, src)
-  Metalsmith(soure) // eslint-disable-line babel/new-cap
+  Metalsmith(source) // eslint-disable-line babel/new-cap
     .source('.')
     .use(template)
     .clean(clean)
