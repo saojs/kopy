@@ -4,6 +4,10 @@
 
 > Gracefully copy a directory with templates.
 
+## Why is this useful?
+
+This could be used to build a scaffolding tool like [yeoman](https://github.com/yeoman/yeoman) or [vue-cli](https://github.com/vuejs/vue-cli).
+
 ## Install
 
 ```bash
