@@ -38,8 +38,4 @@ export default function gracefulCopy({
       })
     }
   }
-
-  function clean() {
-
-  }
 }
