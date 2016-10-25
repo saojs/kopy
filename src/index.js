@@ -11,7 +11,7 @@ export default function gracefulCopy({
   clean = true
 } = {}, cb) {
   const source = path.resolve(cwd, src)
-  Metalsmith(source) // eslint-disable-line babel/new-cap
+  Metalsmith(source) // eslint-disable-line new-cap
     .source('.')
     .use(template)
     .clean(clean)
@@ -29,6 +29,10 @@ export default function gracefulCopy({
 
     function run(file, done) {
       const str = files[file].contents.toString()
+      // do not attempt to render files that do not have mustaches
+      if (!/{{([^{}]+)}}/g.test(str)) {
+        return done()
+      }
       render(str, data, function (err, res) {
         if (err) {
           return done(err)

@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "npm run build && xo src/*.js && rm -rf test/dest && ava",
-    "build": "bubleup"
+    "build": "bili"
   },
   "watch": {
     "./src": [
@@ -22,13 +22,17 @@
     ]
   },
   "files": [
-    "index.js"
+    "dist"
   ],
+  "main": "dist/graceful-copy.common.js",
   "keywords": [
-    ""
+    "copy",
+    "dir",
+    "folder"
   ],
   "devDependencies": {
     "ava": "latest",
+    "bili": "^0.6.3",
     "xo": "latest"
   },
   "xo": {
