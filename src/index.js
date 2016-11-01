@@ -3,24 +3,23 @@ import Metalsmith from 'metalsmith'
 import async from 'async'
 import render from './render'
 
-export default function gracefulCopy({
-  src,
-  dest,
+export default function gracefulCopy(src, dest, {
   data,
   cwd = process.cwd(),
   clean = true
-} = {}, cb) {
-  const source = path.resolve(cwd, src)
-  Metalsmith(source) // eslint-disable-line new-cap
-    .source('.')
-    .use(template)
-    .clean(clean)
-    .destination(path.resolve(source, '../', dest))
-    .build(err => {
-      if (typeof cb === 'function') {
-        cb(err)
-      }
-    })
+} = {}) {
+  return new Promise((resolve, reject) => {
+    const source = path.resolve(cwd, src)
+    Metalsmith(source) // eslint-disable-line new-cap
+      .source('.')
+      .use(template)
+      .clean(clean)
+      .destination(path.resolve(source, '../', dest))
+      .build((err, files) => {
+        if (err) return reject(err)
+        resolve(Object.keys(files))
+      })
+  })
 
   function template(files, metalsmith, done) {
     const keys = Object.keys(files)
@@ -33,7 +32,7 @@ export default function gracefulCopy({
       if (!/{{([^{}]+)}}/g.test(str)) {
         return done()
       }
-      render(str, data, function (err, res) {
+      render(str, data, (err, res) => {
         if (err) {
           return done(err)
         }

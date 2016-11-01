@@ -1,19 +1,18 @@
 import test from 'ava'
-import copy from '../'
+import copy from '../src'
 
-test.cb('main', t => {
-  copy({
-    src: './fixture-src',
-    dest: './dest',
+test('main', async t => {
+  const files = await copy('./fixture-src', './dest', {
     data: {
       has: true,
       name: 'hi'
     }
-  }, err => {
-    const res = require('./dest/hi')
-    t.is(res.name, 'hi')
-    t.true(res.has)
-    t.false(res.hasNot)
-    t.end(err)
   })
+  const res = require('./dest/hi')
+  t.is(res.name, 'hi')
+  t.true(res.has)
+  t.false(res.hasNot)
+
+  // check files
+  t.deepEqual(files, ['hi.json'])
 })

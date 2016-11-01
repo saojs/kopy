@@ -13,7 +13,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "npm run build && xo src/*.js && rm -rf test/dest && ava",
+    "test": "ava && eslint src/*.js && rm -rf test/dest && npm run build",
     "build": "bili"
   },
   "watch": {
@@ -33,16 +33,21 @@
   "devDependencies": {
     "ava": "latest",
     "bili": "^0.6.3",
-    "xo": "latest"
-  },
-  "xo": {
-    "semicolon": false,
-    "space": 2
+    "eslint": "^3.9.1",
+    "eslint-config-rem": "^2.0.0"
   },
   "dependencies": {
     "async": "^2.0.1",
     "consolidate": "^0.14.1",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.2.0"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "rem/esnext"
   }
 }

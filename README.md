@@ -19,9 +19,7 @@ $ npm install --save graceful-copy
 ```js
 const copy = require('graceful-copy')
 
-copy({
-  src: './template',
-  dest: './dest',
+copy('./template', './dest', {
   data: {
     foo: 'bar'
   }
