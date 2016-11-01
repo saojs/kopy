@@ -23,10 +23,10 @@ copy('./template', './dest', {
   data: {
     foo: 'bar'
   }
-}, err => {
-  if (err) return console.log(err)
-
-  console.log('done!')
+}).then(files => {
+  console.log(files) // array of filenames in './dest'
+}).catch(err => {
+  console.log(err.stack)
 })
 ```
 
@@ -36,7 +36,7 @@ Templates could use [handlebars](http://handlebarsjs.com/) syntax.
 
 ## API
 
-### options: object
+### copy(src, dest, options)
 
 #### src: string
 
@@ -45,6 +45,8 @@ Source directory. Could be a relative or absolute path.
 #### dest: string
 
 Destination directory.
+
+### options: object
 
 #### clean: boolean
 

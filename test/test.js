@@ -1,5 +1,10 @@
 import test from 'ava'
 import copy from '../src'
+import {spawnSync} from 'child_process'
+
+test.afterEach(() => {
+  spawnSync('rm', ['-rf', './dest'])
+})
 
 test('main', async t => {
   const files = await copy('./fixture-src', './dest', {
@@ -14,5 +19,5 @@ test('main', async t => {
   t.false(res.hasNot)
 
   // check files
-  t.deepEqual(files, ['hi.json'])
+  t.deepEqual(files, ['hi.json', 'deep/bye.json'])
 })
