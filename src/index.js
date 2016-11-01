@@ -1,6 +1,6 @@
 import path from 'path'
 import Metalsmith from 'metalsmith'
-import async from 'async'
+import asyncEach from 'async.each'
 import render from './render'
 
 export default function gracefulCopy(src, dest, {
@@ -24,7 +24,7 @@ export default function gracefulCopy(src, dest, {
   function template(files, metalsmith, done) {
     const keys = Object.keys(files)
 
-    async.each(keys, run, done)
+    asyncEach(keys, run, done)
 
     function run(file, done) {
       const str = files[file].contents.toString()

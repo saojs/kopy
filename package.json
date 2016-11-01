@@ -37,7 +37,7 @@
     "eslint-config-rem": "^2.0.0"
   },
   "dependencies": {
-    "async": "^2.0.1",
+    "async.each": "^0.5.2",
     "consolidate": "^0.14.1",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.2.0"
