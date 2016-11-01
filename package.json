@@ -1,6 +1,6 @@
 {
   "name": "graceful-copy",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Gracefully copy a directory with templates.",
   "license": "MIT",
   "repository": "egoist/graceful-copy",
