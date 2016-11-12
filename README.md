@@ -60,7 +60,9 @@ Current working directory. Defaults to `process.cwd()`.
 
 The data to render templates in source directory.
 
-### callback: function
+#### skipInterpolation: string | string[]
+
+Patterns used to skip interpolation, eg: `./foo*/bar-*.js`
 
 ---
 
