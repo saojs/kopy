@@ -1,3 +1,4 @@
+import fs from 'fs'
 import test from 'ava'
 import copy from '../src'
 import {spawnSync} from 'child_process'
@@ -40,4 +41,16 @@ test('it should skip interpolation by glob patterns', async t => {
   const bar = require('./dest-skip/deep/bye')
   t.is(foo.name, '{{ name }}')
   t.is(bar.name, '{{ name }}')
+})
+
+test('it supports custom template engine', async t => {
+  await copy('./fixture-ejs', './dest-ejs', {
+    engine: 'ejs',
+    data: {
+      foo: true
+    }
+  })
+  const content = fs.readFileSync('./dest-ejs/foo.txt')
+  t.true(content.indexOf('this is ejs') > -1)
+  t.true(content.indexOf('<%') === -1)
 })

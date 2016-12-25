@@ -48,21 +48,50 @@ Destination directory.
 
 #### options: object
 
+##### engine: string
+
+Default: `handlebars`
+
+All template engines that're supported by [consolidate.js](https://github.com/tj/consolidate.js)
+
 ##### clean: boolean
 
-Whether to clean destination directory before writing to it. Defaults to `true`.
+Default: `true`
 
-#### cwd: string
+Whether to clean destination directory before writing to it.
 
-Current working directory. Defaults to `process.cwd()`.
+##### cwd: string
 
-#### data: object
+Default: `process.cwd()`
+
+Current working directory.
+
+##### data: object
+
+Default: `{}`
 
 The data to render templates in source directory.
 
-#### skipInterpolation: string | string[]
+##### skipInterpolation: string | string[]
+
+Default: `undefined`
 
 Patterns used to skip interpolation, eg: `./foo*/bar-*.js`
+
+##### exclude: function
+
+Default: `undefined`
+
+Provide a function to perform custom `exclude` logic:
+
+```js
+copy(src, dest, {
+  exclude(file, content) {
+    // exclude .js files
+    return /\.js$/.test(file)
+  }
+})
+```
 
 ---
 

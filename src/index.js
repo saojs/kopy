@@ -2,13 +2,16 @@ import path from 'path'
 import Metalsmith from 'metalsmith'
 import asyncEach from 'async.each'
 import match from 'multimatch'
-import render from './render'
+import isBinaryPath from 'is-binary-path'
+import getEngine from './get-engine'
 
 export default function gracefulCopy(src, dest, {
   data = {},
   cwd = process.cwd(),
   clean = true,
-  skipInterpolation
+  skipInterpolation,
+  engine = 'handlebars',
+  exclude
 } = {}) {
   return new Promise((resolve, reject) => {
     const source = path.resolve(process.cwd(), src)
@@ -32,15 +35,17 @@ export default function gracefulCopy(src, dest, {
 
     function run(file, done) {
       const str = files[file].contents.toString()
-      // do not attempt to render files that do not have mustaches
-      const noMustache = !/{{([^{}]+)}}/g.test(str)
       // skip interpolation by glob patterns like *.vue
       const shouldSkip = matchedFiles && (matchedFiles.indexOf(file) !== -1)
+      const shouldExclude = exclude && exclude(file, str)
 
-      if (shouldSkip || noMustache) {
+      if (shouldSkip || shouldExclude || isBinaryPath(file)) {
         return done()
       }
-      render(str, data, (err, res) => {
+
+      const renderer = getEngine(engine)
+
+      renderer.render(str, data, (err, res) => {
         if (err) {
           return done(err)
         }

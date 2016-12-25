@@ -1442,6 +1442,10 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
+ejs:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.5.tgz#6ef4e954ea7dcf54f66aad2fe7aa421932d9ed77"
+
 empower-core@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/empower-core/-/empower-core-0.6.1.tgz#6c187f502fcef7554d57933396aac655483772b1"
@@ -2051,6 +2055,12 @@ irregular-plurals@^1.0.0:
 is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d"
+
+is-binary-path:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/is-binary-path/-/is-binary-path-2.0.0.tgz#0e61cea6974b24dda8bcc8366ce58a69265d1a36"
+  dependencies:
+    binary-extensions "^1.0.0"
 
 is-binary-path@^1.0.0:
   version "1.0.1"
