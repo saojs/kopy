@@ -1,10 +1,13 @@
 machine:
-  node:
-    version: 5
-
-test:
   pre:
-    - npm i -g bubleup
+    - mkdir ~/.yarn-cache
+  node:
+    version: 7
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  cache_directories:
+    - "~/.yarn-cache"
   override:
-    - nvm use 4 && npm test
-    - nvm use 5 && npm test
+    - yarn install
