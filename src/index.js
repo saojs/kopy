@@ -5,18 +5,18 @@ import match from 'multimatch'
 import render from './render'
 
 export default function gracefulCopy(src, dest, {
-  data,
+  data = {},
   cwd = process.cwd(),
   clean = true,
   skipInterpolation
 } = {}) {
   return new Promise((resolve, reject) => {
-    const source = path.resolve(cwd, src)
+    const source = path.resolve(process.cwd(), src)
     Metalsmith(source) // eslint-disable-line new-cap
       .source('.')
       .use(template)
       .clean(clean)
-      .destination(path.resolve(source, '../', dest))
+      .destination(path.resolve(cwd, dest))
       .build((err, files) => {
         if (err) return reject(err)
         resolve(Object.keys(files))

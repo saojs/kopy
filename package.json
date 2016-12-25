@@ -14,7 +14,8 @@
   },
   "scripts": {
     "test": "ava && eslint src/*.js && rm -rf test/dest && npm run build",
-    "build": "bili"
+    "build": "bili",
+    "example": "mkdir -p dist-example && cd dist-example && node ../example.js"
   },
   "watch": {
     "./src": [
