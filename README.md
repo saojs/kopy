@@ -46,9 +46,9 @@ Source directory. Could be a relative or absolute path.
 
 Destination directory.
 
-### options: object
+#### options: object
 
-#### clean: boolean
+##### clean: boolean
 
 Whether to clean destination directory before writing to it. Defaults to `true`.
 
