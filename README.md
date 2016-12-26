@@ -78,16 +78,23 @@ Current working directory.
 ##### data
 
 Type: `object`<br>
-Default: `{}`
+Default: `undefined`
 
-The data to render templates in source directory.
+The data to render templates in source directory. If it's set we'll skip `prompts`.
+
+##### prompts
+
+Type: `Array<InquirerPrompt>`<br>
+Default: `undefined`
+
+[inquirer](https://github.com/SBoudrias/Inquirer.js) prompts, you can use this to gate data from user. If it's set it will override `data`
 
 ##### skipInterpolation
 
 Type: `string | Array<string> | function`<br>
 Default: `undefined` (we skip all [binary files](https://github.com/sindresorhus/is-binary-path) by default)
 
-Patterns([multimatch](https://github.com/sindresorhus/multimatch)) used to skip interpolation, eg: `./foo*/bar-*.js`
+Patterns([minimatch](https://github.com/isaacs/minimatch#features)) used to skip interpolation, eg: `./foo*/bar-*.js`
 
 It could also be a function, whose first arg is file path and second arg is file content, eg. we want to exclude all `.js` files:
 
@@ -95,6 +102,22 @@ It could also be a function, whose first arg is file path and second arg is file
 copy(src, dest, {
   skipInterpolation(file, content) {
     return /\.js$/.test(file)
+  }
+})
+```
+
+##### filters
+
+Type: `object`<br>
+Default: `undefined`
+
+An object containing file filter rules, the key of each entry is a minimatch pattern, and its value is a JavaScript expression evaluated in the context of (prompt answers) data:
+
+```js
+copy(src, dest, {
+  filters: {
+    '**/*.js': 'useJavaScript',
+    '**/*.ts': '!useJavaScript'
   }
 })
 ```

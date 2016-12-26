@@ -1,22 +1,28 @@
 import path from 'path'
 import Metalsmith from 'metalsmith'
-import asyncEach from 'async.each'
-import match from 'multimatch'
-import isBinaryPath from 'is-binary-path'
-import getEngine from './get-engine'
+import filterFiles from './filter-files'
+import ask from './ask'
+import template from './template'
 
 export default function kopy(src, dest, {
-  data = {},
   cwd = process.cwd(),
   clean = true,
+  // ask options
+  data,
+  prompts,
+  // template options
   skipInterpolation,
-  engine = 'handlebars'
+  engine = 'handlebars',
+  // filter options
+  filters
 } = {}) {
   return new Promise((resolve, reject) => {
-    const source = path.resolve(process.cwd(), src)
+    const source = path.resolve(cwd, src)
     Metalsmith(source) // eslint-disable-line new-cap
       .source('.')
-      .use(template)
+      .use(ask(data, prompts))
+      .use(filterFiles(filters))
+      .use(template({skipInterpolation, engine}))
       .clean(clean)
       .destination(path.resolve(cwd, dest))
       .build((err, files) => {
@@ -24,42 +30,4 @@ export default function kopy(src, dest, {
         resolve(Object.keys(files))
       })
   })
-
-  function template(files, metalsmith, done) {
-    const keys = Object.keys(files)
-
-    let matchedFile
-    if (skipInterpolation) {
-      if (typeof skipInterpolation === 'function') {
-        matchedFile = skipInterpolation
-      } else {
-        const matches = match(keys, skipInterpolation)
-        matchedFile = file => matches.indexOf(file) !== -1
-      }
-    }
-
-    asyncEach(keys, run, done)
-
-    function run(file, done) {
-      const content = files[file].contents.toString()
-
-      const shouldSkip = matchedFile && matchedFile(file, content)
-
-      // we skip unmathed files (by multimatch or your own function)
-      // and binary files
-      if (shouldSkip || isBinaryPath(file)) {
-        return done()
-      }
-
-      const renderer = getEngine(engine)
-
-      renderer.render(content, data, (err, res) => {
-        if (err) {
-          return done(err)
-        }
-        files[file].contents = new Buffer(res)
-        done()
-      })
-    }
-  }
 }

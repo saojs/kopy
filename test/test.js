@@ -54,3 +54,12 @@ test('it supports custom template engine', async t => {
   t.true(content.indexOf('this is ejs') > -1)
   t.true(content.indexOf('<%') === -1)
 })
+
+test('it filters files', async t => {
+  const files = await copy('./fixture-src', './dest-filter', {
+    filters: {
+      '*.json': 'false'
+    }
+  })
+  t.deepEqual(files, ['deep/bye.json'])
+})

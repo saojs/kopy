@@ -43,8 +43,10 @@
     "async.each": "^0.5.2",
     "consolidate": "^0.14.1",
     "handlebars": "^4.0.5",
+    "inquirer": "^2.0.0",
     "is-binary-path": "^2.0.0",
     "metalsmith": "^2.2.0",
+    "minimatch": "^3.0.3",
     "multimatch": "^2.1.0"
   },
   "ava": {
