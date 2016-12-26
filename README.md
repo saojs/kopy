@@ -87,7 +87,7 @@ The data to render templates in source directory. If it's set we'll skip `prompt
 Type: `Array<InquirerPrompt>`<br>
 Default: `undefined`
 
-[inquirer](https://github.com/SBoudrias/Inquirer.js) prompts, you can use this to gate data from user. If it's set it will override `data`
+[inquirer](https://github.com/SBoudrias/Inquirer.js) prompts, you can use this to get data from user. If it's set it will override `data`
 
 ##### skipInterpolation
 
