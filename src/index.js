@@ -5,7 +5,7 @@ import match from 'multimatch'
 import isBinaryPath from 'is-binary-path'
 import getEngine from './get-engine'
 
-export default function gracefulCopy(src, dest, {
+export default function kopy(src, dest, {
   data = {},
   cwd = process.cwd(),
   clean = true,

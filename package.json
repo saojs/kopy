@@ -1,9 +1,9 @@
 {
-  "name": "graceful-copy",
+  "name": "kopy",
   "version": "1.1.0",
-  "description": "Gracefully copy a directory with templates.",
+  "description": "Gracefully copy a directory and render templates.",
   "license": "MIT",
-  "repository": "egoist/graceful-copy",
+  "repository": "egoist/kopy",
   "author": {
     "name": "EGOIST",
     "email": "0x142857@gmail.com",
@@ -25,7 +25,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/graceful-copy.common.js",
+  "main": "dist/kopy.common.js",
   "keywords": [
     "copy",
     "dir",

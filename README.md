@@ -1,8 +1,8 @@
-# graceful-copy
+# kopy
 
-[![NPM version](https://img.shields.io/npm/v/graceful-copy.svg?style=flat)](https://npmjs.com/package/graceful-copy) [![NPM downloads](https://img.shields.io/npm/dm/graceful-copy.svg?style=flat)](https://npmjs.com/package/graceful-copy) [![Build Status](https://img.shields.io/circleci/project/egoist/graceful-copy/master.svg?style=flat)](https://circleci.com/gh/egoist/graceful-copy)
+[![NPM version](https://img.shields.io/npm/v/kopy.svg?style=flat)](https://npmjs.com/package/kopy) [![NPM downloads](https://img.shields.io/npm/dm/kopy.svg?style=flat)](https://npmjs.com/package/kopy) [![Build Status](https://img.shields.io/circleci/project/egoist/kopy/master.svg?style=flat)](https://circleci.com/gh/egoist/kopy)
 
-> Gracefully copy a directory with templates.
+> Gracefully copy a directory and render templates.
 
 ## Why is this useful?
 
@@ -11,13 +11,13 @@ This could be used to build a scaffolding tool like [yeoman](https://github.com/
 ## Install
 
 ```bash
-$ npm install --save graceful-copy
+$ npm install --save kopy
 ```
 
 ## Usage
 
 ```js
-const copy = require('graceful-copy')
+const copy = require('kopy')
 
 copy('./template', './dest', {
   data: {
@@ -99,7 +99,7 @@ copy(src, dest, {
 })
 ```
 
-**graceful-copy** © [EGOIST](https://github.com/egoist), Released under the [MIT](https://egoist.mit-license.org/) License.<br>
-Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/graceful-copy/contributors)).
+**kopy** © [EGOIST](https://github.com/egoist), Released under the [MIT](https://egoist.mit-license.org/) License.<br>
+Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/kopy/contributors)).
 
 > [egoistian.com](https://egoistian.com) · GitHub [@egoist](https://github.com/egoist) · Twitter [@rem_rin_rin](https://twitter.com/rem_rin_rin)
