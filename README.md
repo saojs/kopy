@@ -1,6 +1,6 @@
 # graceful-copy
 
-[![NPM version](https://img.shields.io/npm/v/graceful-copy.svg?style=flat-square)](https://npmjs.com/package/graceful-copy) [![NPM downloads](https://img.shields.io/npm/dm/graceful-copy.svg?style=flat-square)](https://npmjs.com/package/graceful-copy) [![Build Status](https://img.shields.io/circleci/project/egoist/graceful-copy/master.svg?style=flat-square)](https://circleci.com/gh/egoist/graceful-copy)
+[![NPM version](https://img.shields.io/npm/v/graceful-copy.svg?style=flat)](https://npmjs.com/package/graceful-copy) [![NPM downloads](https://img.shields.io/npm/dm/graceful-copy.svg?style=flat)](https://npmjs.com/package/graceful-copy) [![Build Status](https://img.shields.io/circleci/project/egoist/graceful-copy/master.svg?style=flat)](https://circleci.com/gh/egoist/graceful-copy)
 
 > Gracefully copy a directory with templates.
 
@@ -30,70 +30,74 @@ copy('./template', './dest', {
 })
 ```
 
-## Templates
+## Template Syntax
 
-Templates could use [handlebars](http://handlebarsjs.com/) syntax.
+Templates could use [handlebars](http://handlebarsjs.com/) syntax or any template engine in [consolidate.js](https://github.com/tj/consolidate.js)
 
 ## API
 
 ### copy(src, dest, options)
 
-#### src: string
+#### src
+
+Type: `string`<br>
+Required: `true`
 
 Source directory. Could be a relative or absolute path.
 
-#### dest: string
+#### dest
+
+Type: `string`<br>
+Required: `true`
 
 Destination directory.
 
-#### options: object
+#### options
 
-##### engine: string
+##### engine
 
+Type: `string`<br>
 Default: `handlebars`
 
 All template engines that're supported by [consolidate.js](https://github.com/tj/consolidate.js)
 
-##### clean: boolean
+##### clean
 
+Type: `boolean`<br>
 Default: `true`
 
 Whether to clean destination directory before writing to it.
 
-##### cwd: string
+##### cwd
 
+Type: `string`<br>
 Default: `process.cwd()`
 
 Current working directory.
 
-##### data: object
+##### data
 
+Type: `object`<br>
 Default: `{}`
 
 The data to render templates in source directory.
 
-##### skipInterpolation: string | string[]
+##### skipInterpolation
 
-Default: `undefined`
+Type: `string | Array<string> | function`<br>
+Default: `undefined` (we skip all [binary files](https://github.com/sindresorhus/is-binary-path) by default)
 
-Patterns used to skip interpolation, eg: `./foo*/bar-*.js`
+Patterns([multimatch](https://github.com/sindresorhus/multimatch)) used to skip interpolation, eg: `./foo*/bar-*.js`
 
-##### exclude: function
-
-Default: `undefined`
-
-Provide a function to perform custom `exclude` logic:
+It could also be a function, whose first arg is file path and second arg is file content, eg. we want to exclude all `.js` files:
 
 ```js
 copy(src, dest, {
-  exclude(file, content) {
-    // exclude .js files
+  skipInterpolation(file, content) {
     return /\.js$/.test(file)
   }
 })
 ```
-
----
 
 **graceful-copy** © [EGOIST](https://github.com/egoist), Released under the [MIT](https://egoist.mit-license.org/) License.<br>
 Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/graceful-copy/contributors)).

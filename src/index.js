@@ -10,8 +10,7 @@ export default function gracefulCopy(src, dest, {
   cwd = process.cwd(),
   clean = true,
   skipInterpolation,
-  engine = 'handlebars',
-  exclude
+  engine = 'handlebars'
 } = {}) {
   return new Promise((resolve, reject) => {
     const source = path.resolve(process.cwd(), src)
@@ -29,23 +28,32 @@ export default function gracefulCopy(src, dest, {
   function template(files, metalsmith, done) {
     const keys = Object.keys(files)
 
-    const matchedFiles = skipInterpolation && match(keys, skipInterpolation)
+    let matchedFile
+    if (skipInterpolation) {
+      if (typeof skipInterpolation === 'function') {
+        matchedFile = skipInterpolation
+      } else {
+        const matches = match(keys, skipInterpolation)
+        matchedFile = file => matches.indexOf(file) !== -1
+      }
+    }
 
     asyncEach(keys, run, done)
 
     function run(file, done) {
-      const str = files[file].contents.toString()
-      // skip interpolation by glob patterns like *.vue
-      const shouldSkip = matchedFiles && (matchedFiles.indexOf(file) !== -1)
-      const shouldExclude = exclude && exclude(file, str)
+      const content = files[file].contents.toString()
 
-      if (shouldSkip || shouldExclude || isBinaryPath(file)) {
+      const shouldSkip = matchedFile && matchedFile(file, content)
+
+      // we skip unmathed files (by multimatch or your own function)
+      // and binary files
+      if (shouldSkip || isBinaryPath(file)) {
         return done()
       }
 
       const renderer = getEngine(engine)
 
-      renderer.render(str, data, (err, res) => {
+      renderer.render(content, data, (err, res) => {
         if (err) {
           return done(err)
         }
