@@ -20,6 +20,7 @@ export default function kopy(src, dest, {
     const source = path.resolve(cwd, src)
     Metalsmith(source) // eslint-disable-line new-cap
       .source('.')
+      .ignore(file => /node_modules/.test(file))
       .use(ask(data, prompts))
       .use(filterFiles(filters))
       .use(template({skipInterpolation, engine}))
