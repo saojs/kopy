@@ -94,7 +94,7 @@ Default: `undefined`
 Type: `object`<br>
 Default: `undefined`
 
-The data that prompts answers will assign to, `Object.assign({}, defaultDate, answers)`
+The data that prompts answers will assign to, `Object.assign({}, defaultData, answers)`
 
 ##### skipInterpolation
 
