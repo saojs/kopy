@@ -89,6 +89,13 @@ Default: `undefined`
 
 [inquirer](https://github.com/SBoudrias/Inquirer.js) prompts, you can use this to get data from user. If it's set it will override `data`
 
+##### defaultData
+
+Type: `object`<br>
+Default: `undefined`
+
+The data that prompts answers will assign to, `Object.assign({}, defaultDate, answers)`
+
 ##### skipInterpolation
 
 Type: `string | Array<string> | function`<br>

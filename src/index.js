@@ -9,6 +9,7 @@ export default function kopy(src, dest, {
   clean = true,
   // ask options
   data,
+  defaultData,
   prompts,
   // template options
   skipInterpolation,
@@ -21,7 +22,7 @@ export default function kopy(src, dest, {
     Metalsmith(source) // eslint-disable-line new-cap
       .source('.')
       .ignore(file => /node_modules/.test(file))
-      .use(ask(data, prompts))
+      .use(ask(data, prompts, defaultData))
       .use(filterFiles(filters))
       .use(template({skipInterpolation, engine}))
       .clean(clean)
