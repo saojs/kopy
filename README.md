@@ -80,21 +80,15 @@ Current working directory.
 Type: `object`<br>
 Default: `undefined`
 
-The data to render templates in source directory. If it's set we'll skip `prompts`.
+The data to render templates in source directory.
 
 ##### prompts
 
 Type: `Array<InquirerPrompt>`<br>
 Default: `undefined`
 
-[inquirer](https://github.com/SBoudrias/Inquirer.js) prompts, you can use this to get data from user. If it's set it will override `data`
+[inquirer](https://github.com/SBoudrias/Inquirer.js) prompts, the answers of prompts will be assigned to `data`
 
-##### defaultData
-
-Type: `object`<br>
-Default: `undefined`
-
-The data that prompts answers will assign to, `Object.assign({}, defaultData, answers)`
 
 ##### skipInterpolation
 
