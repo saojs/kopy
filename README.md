@@ -64,7 +64,7 @@ All template engines that're supported by [consolidate.js](https://github.com/tj
 ##### clean
 
 Type: `boolean`<br>
-Default: `undefined`
+Default: `false`
 
 Whether to clean destination directory before writing to it.
 
@@ -106,6 +106,13 @@ copy(src, dest, {
   }
 })
 ```
+
+##### disableInterpolation
+
+Type: `boolean`<br>
+Default: `false`
+
+Similar to `skipInterpolation`, but `disableInterpolation` disables all template interpolation, template markup will remain the way it is.
 
 ##### filters
 

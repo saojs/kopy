@@ -63,3 +63,11 @@ test('it filters files', async t => {
   })
   t.deepEqual(files, ['deep/bye.json'])
 })
+
+test('disableInterpolation', async t => {
+  const files = await copy('./fixture-src', './dest-disableInterpolation', {
+    disableInterpolation: true
+  })
+  const foo = fs.readFileSync('./dest-disableInterpolation/hi.json')
+  t.true(foo.indexOf('{{#if has}}') > -1)
+})
