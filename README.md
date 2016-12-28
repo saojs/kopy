@@ -64,7 +64,7 @@ All template engines that're supported by [consolidate.js](https://github.com/tj
 ##### clean
 
 Type: `boolean`<br>
-Default: `true`
+Default: `undefined`
 
 Whether to clean destination directory before writing to it.
 

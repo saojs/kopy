@@ -6,7 +6,7 @@ import template from './template'
 
 export default function kopy(src, dest, {
   cwd = process.cwd(),
-  clean = true,
+  clean,
   // ask options
   data,
   prompts,
