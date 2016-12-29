@@ -9,7 +9,7 @@ test.after('cleanup', () => {
 })
 
 test('main', async t => {
-  const files = await copy('./fixture-src', './dest', {
+  const {files} = await copy('./fixture-src', './dest', {
     data: {
       has: true,
       name: 'hi'
@@ -28,7 +28,7 @@ test('main', async t => {
 })
 
 test('it should skip interpolation by glob patterns', async t => {
-  const files = await copy('./fixture-src', './dest-skip', {
+  const {files} = await copy('./fixture-src', './dest-skip', {
     data: {
       name: 'hi'
     },
@@ -56,7 +56,7 @@ test('it supports custom template engine', async t => {
 })
 
 test('it filters files', async t => {
-  const files = await copy('./fixture-src', './dest-filter', {
+  const {files} = await copy('./fixture-src', './dest-filter', {
     filters: {
       '*.json': 'false'
     }
@@ -65,9 +65,17 @@ test('it filters files', async t => {
 })
 
 test('disableInterpolation', async t => {
-  const files = await copy('./fixture-src', './dest-disableInterpolation', {
+  const {files} = await copy('./fixture-src', './dest-disableInterpolation', {
     disableInterpolation: true
   })
   const foo = fs.readFileSync('./dest-disableInterpolation/hi.json')
   t.true(foo.indexOf('{{#if has}}') > -1)
+})
+
+test('it returns metadata', async t => {
+  const {data} = await copy('./fixture-src', './dest-disableInterpolation', {
+    disableInterpolation: true,
+    data: {wow: true}
+  })
+  t.deepEqual(data, {wow: true})
 })

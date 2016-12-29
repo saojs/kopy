@@ -20,8 +20,9 @@ export default function kopy(src, dest, {
 } = {}) {
   return new Promise((resolve, reject) => {
     const source = path.resolve(cwd, src)
-    Metalsmith(source) // eslint-disable-line new-cap
-      .source('.')
+    const pipe = Metalsmith(source) // eslint-disable-line new-cap
+
+    pipe.source('.')
       .ignore(file => /node_modules/.test(file))
       .use(ask(data, prompts))
       .use(filterFiles(filters))
@@ -30,7 +31,10 @@ export default function kopy(src, dest, {
       .destination(path.resolve(cwd, dest))
       .build((err, files) => {
         if (err) return reject(err)
-        resolve(Object.keys(files))
+        resolve({
+          files: Object.keys(files),
+          data: pipe.metadata()
+        })
       })
   })
 }

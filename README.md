@@ -23,7 +23,7 @@ copy('./template', './dest', {
   data: {
     foo: 'bar'
   }
-}).then(files => {
+}).then(({files}) => {
   console.log(files) // array of filenames in './dest'
 }).catch(err => {
   console.log(err.stack)
@@ -37,6 +37,8 @@ Templates could use [handlebars](http://handlebarsjs.com/) syntax or any templat
 ## API
 
 ### copy(src, dest, options)
+
+Returns a Promise which resolve `{files, data}`, `data` is the result of answers of `options.prompts` merged with `options.data`.
 
 #### src
 
