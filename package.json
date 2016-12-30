@@ -15,7 +15,7 @@
   "scripts": {
     "test": "ava && eslint src/*.js && rm -rf test/dest && npm run build",
     "build": "bili",
-    "example": "mkdir -p dist-example && cd dist-example && node ../example.js"
+    "example": "npm run build && mkdir -p dist-example && cd dist-example && node ../example.js"
   },
   "watch": {
     "./src": [
@@ -48,7 +48,8 @@
     "jstransformer-ejs": "^0.0.3",
     "metalsmith": "^2.2.0",
     "minimatch": "^3.0.3",
-    "multimatch": "^2.1.0"
+    "multimatch": "^2.1.0",
+    "path-exists": "^3.0.0"
   },
   "ava": {
     "require": [

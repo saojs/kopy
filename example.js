@@ -6,10 +6,17 @@ copy('../test/fixture-src', './', {
       type: 'confirm',
       message: 'hello?',
       name: 'has'
+    },
+    {
+      name: 'name',
+      message: 'your name?'
     }
-  ]
+  ],
+  skipExisting(file) {
+    console.log(`${file} exists! skipped...`)
+  }
 })
-  .then(files => {
-    console.log(files)
+  .then(res => {
+    console.log(res)
   })
   .catch(err => console.log(err.stack))

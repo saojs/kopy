@@ -144,6 +144,21 @@ copy(src, dest, {
 })
 ```
 
+##### skipExisting
+
+Type: `function` `boolean`<br>
+Default: `undefined`
+
+Whether to skip existing file, it could be function that takes the path to existing file as argument.
+
+```js
+copy(src, dest, {
+  skipExisting(file) {
+    console.log(`${file} exists, skipped!`)
+  }
+})
+```
+
 ---
 
 **kopy** © [EGOIST](https://github.com/egoist), Released under the [MIT](https://egoist.mit-license.org/) License.<br>

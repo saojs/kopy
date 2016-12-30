@@ -2,8 +2,8 @@ import path from 'path'
 import Metalsmith from 'metalsmith'
 import filterFiles from './filter-files'
 import ask from './ask'
-import noop from './noop'
 import useTemplate from './template'
+import skip from './skip'
 
 export default function kopy(src, dest, {
   cwd = process.cwd(),
@@ -17,19 +17,32 @@ export default function kopy(src, dest, {
   template,
   templateOptions,
   // filter options
-  filters
+  filters,
+  // skip existing file
+  skipExisting
 } = {}) {
   return new Promise((resolve, reject) => {
     const source = path.resolve(cwd, src)
+    const destPath = path.resolve(cwd, dest)
     const pipe = Metalsmith(source) // eslint-disable-line new-cap
 
-    pipe.source('.')
+    pipe
+      .source('.')
       .ignore(file => /node_modules/.test(file))
       .use(ask(data, prompts))
       .use(filterFiles(filters))
-      .use(disableInterpolation ? noop : useTemplate({skipInterpolation, template, templateOptions}))
+
+    if (!disableInterpolation) {
+      pipe.use(useTemplate({skipInterpolation, template, templateOptions}))
+    }
+
+    if (skipExisting) {
+      pipe.use(skip(skipExisting, destPath))
+    }
+
+    pipe
       .clean(clean)
-      .destination(path.resolve(cwd, dest))
+      .destination(destPath)
       .build((err, files) => {
         if (err) return reject(err)
         resolve({
