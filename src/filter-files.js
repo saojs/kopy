@@ -22,6 +22,6 @@ function filter(files, filters, data, done) {
 
 export default function filterFiles(filters) {
   return function (files, metalsmith, done) {
-    filter(files, filters, metalsmith.metadata(), done)
+    filter(files, filters, metalsmith.metadata().merged, done)
   }
 }

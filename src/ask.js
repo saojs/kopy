@@ -5,14 +5,16 @@ export default function ask(data, prompts) {
     if (prompts) {
       inquirer.prompt(prompts)
         .then(answers => {
-          metalsmith.metadata(Object.assign({}, data, answers))
+          const merged = Object.assign({}, data, answers)
+          metalsmith.metadata({data, answers, merged})
           done()
         })
         .catch(done)
     } else if (data) {
-      metalsmith.metadata(data)
+      metalsmith.metadata({data, merged: data})
       done()
     } else {
+      metalsmith.metadata({merged: {}})
       done()
     }
   }

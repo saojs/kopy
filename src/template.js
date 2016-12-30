@@ -32,7 +32,7 @@ export default ({
         return done()
       }
 
-      const res = require('jstransformer')(template).render(content, templateOptions, metalsmith.metadata())
+      const res = require('jstransformer')(template).render(content, templateOptions, metalsmith.metadata().merged)
       files[file].contents = new Buffer(res.body)
       done()
     }

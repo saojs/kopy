@@ -38,7 +38,7 @@ Templates could use [ejs](http://ejs.co) syntax or any template engine supported
 
 ### copy(src, dest, options)
 
-Returns a Promise which resolve `{files, data}`, `data` is the result of answers of `options.prompts` merged with `options.data`.
+Returns a Promise which resolve `{files, data, answers, merged}`, `merged` is the result of answers of `answers` merged with `data`.
 
 #### src
 

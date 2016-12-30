@@ -47,7 +47,7 @@ export default function kopy(src, dest, {
         if (err) return reject(err)
         resolve({
           files: Object.keys(files),
-          data: pipe.metadata()
+          ...pipe.metadata()
         })
       })
   })

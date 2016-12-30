@@ -13,8 +13,8 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "ava && eslint src/*.js && rm -rf test/dest && npm run build",
-    "build": "bili",
+    "test": "NODE_ENV=test ava && eslint src/*.js && rm -rf test/dest && npm run build",
+    "build": "bili --js babel",
     "example": "npm run build && mkdir -p dist-example && cd dist-example && node ../example.js"
   },
   "watch": {
@@ -33,12 +33,14 @@
   ],
   "devDependencies": {
     "ava": "latest",
-    "bili": "^0.6.3",
+    "babel-preset-stage-2": "^6.18.0",
+    "bili": "0.10.0",
     "ejs": "^2.5.5",
     "eslint": "^3.9.1",
     "eslint-config-rem": "^2.0.0",
     "jstransformer-handlebars": "^1.0.0",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "rollup-plugin-babel": "^2.7.1"
   },
   "dependencies": {
     "async.each": "^0.5.2",
