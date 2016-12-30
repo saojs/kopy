@@ -1,6 +1,6 @@
 {
-  "name": "{{ name }}",{{#if has}}
-  "has": true,{{/if}}{{#unless hasNot}}
-  "hasNot": false{{/unless}}
+  "name": "<%= name %>",<% if (has) { %>
+  "has": true<% } else { %>,
+  "has": false<% } %>
 }
 

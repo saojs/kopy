@@ -32,7 +32,7 @@ copy('./template', './dest', {
 
 ## Template Syntax
 
-Templates could use [handlebars](http://handlebarsjs.com/) syntax or any template engine in [consolidate.js](https://github.com/tj/consolidate.js)
+Templates could use [ejs](http://ejs.co) syntax or any template engine supported by [jstransformer](https://github.com/jstransformers)
 
 ## API
 
@@ -56,12 +56,24 @@ Destination directory.
 
 #### options
 
-##### engine
+##### template
 
-Type: `string`<br>
-Default: `handlebars`
+Type: `object`<br>
+Default: `require('jstransformer-ejs')`
 
-All template engines that're supported by [consolidate.js](https://github.com/tj/consolidate.js)
+You can use a custom template engine, like [handlebars]:
+
+```js
+copy(src, dest, {
+  template: require('jstransformer-handlebars')
+})
+```
+
+##### templateOptions
+
+Type: `object`
+
+The template engine options.
 
 ##### clean
 

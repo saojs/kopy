@@ -1,11 +1,11 @@
 import asyncEach from 'async.each'
 import match from 'multimatch'
 import isBinaryPath from 'is-binary-path'
-import getEngine from './get-engine'
 
 export default ({
   skipInterpolation,
-  engine
+  template = require('jstransformer-ejs'),
+  templateOptions
 } = {}) => {
   return (files, metalsmith, done) => {
     const keys = Object.keys(files)
@@ -32,15 +32,9 @@ export default ({
         return done()
       }
 
-      const renderer = getEngine(engine)
-
-      renderer.render(content, metalsmith.metadata(), (err, res) => {
-        if (err) {
-          return done(err)
-        }
-        files[file].contents = new Buffer(res)
-        done()
-      })
+      const res = require('jstransformer')(template).render(content, templateOptions, metalsmith.metadata())
+      files[file].contents = new Buffer(res.body)
+      done()
     }
   }
 }

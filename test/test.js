@@ -18,10 +18,9 @@ test('main', async t => {
   const res = require('./dest/hi')
   t.is(res.name, 'hi')
   t.true(res.has)
-  t.false(res.hasNot)
 
   // check files
-  t.deepEqual(files, ['hi.json', 'skipInterpolation.json', 'deep/bye.json'])
+  t.deepEqual(files, ['hi.json', 'deep/bye.json'])
 
   const foo = require('./dest/deep/bye')
   t.is(foo.name, 'hi')
@@ -30,33 +29,34 @@ test('main', async t => {
 test('it should skip interpolation by glob patterns', async t => {
   const {files} = await copy('./fixture-src', './dest-skip', {
     data: {
-      name: 'hi'
+      name: 'hi',
+      has: true
     },
     skipInterpolation: [
-      'skipInterpolation.json',
       'deep/bye.*'
     ]
   })
-  const foo = require('./dest-skip/skipInterpolation')
   const bar = require('./dest-skip/deep/bye')
-  t.is(foo.name, '{{ name }}')
-  t.is(bar.name, '{{ name }}')
+  t.is(bar.name, '<%= name %>')
 })
 
 test('it supports custom template engine', async t => {
-  await copy('./fixture-ejs', './dest-ejs', {
-    engine: 'ejs',
+  await copy('./fixture-hbs', './dest-hbs', {
+    template: require('jstransformer-handlebars'),
     data: {
       foo: true
     }
   })
-  const content = fs.readFileSync('./dest-ejs/foo.txt')
-  t.true(content.indexOf('this is ejs') > -1)
-  t.true(content.indexOf('<%') === -1)
+  const content = fs.readFileSync('./dest-hbs/foo.txt')
+  t.true(content.indexOf('this is hbs') > -1)
+  t.true(content.indexOf('{{') === -1)
 })
 
 test('it filters files', async t => {
   const {files} = await copy('./fixture-src', './dest-filter', {
+    data: {
+      name: 'foo'
+    },
     filters: {
       '*.json': 'false'
     }
@@ -69,7 +69,7 @@ test('disableInterpolation', async t => {
     disableInterpolation: true
   })
   const foo = fs.readFileSync('./dest-disableInterpolation/hi.json')
-  t.true(foo.indexOf('{{#if has}}') > -1)
+  t.true(foo.indexOf('if (has)') > -1)
 })
 
 test('it returns metadata', async t => {

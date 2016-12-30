@@ -3,7 +3,7 @@ import Metalsmith from 'metalsmith'
 import filterFiles from './filter-files'
 import ask from './ask'
 import noop from './noop'
-import template from './template'
+import useTemplate from './template'
 
 export default function kopy(src, dest, {
   cwd = process.cwd(),
@@ -14,7 +14,8 @@ export default function kopy(src, dest, {
   // template options
   disableInterpolation = false,
   skipInterpolation,
-  engine = 'handlebars',
+  template,
+  templateOptions,
   // filter options
   filters
 } = {}) {
@@ -26,7 +27,7 @@ export default function kopy(src, dest, {
       .ignore(file => /node_modules/.test(file))
       .use(ask(data, prompts))
       .use(filterFiles(filters))
-      .use(disableInterpolation ? noop : template({skipInterpolation, engine}))
+      .use(disableInterpolation ? noop : useTemplate({skipInterpolation, template, templateOptions}))
       .clean(clean)
       .destination(path.resolve(cwd, dest))
       .build((err, files) => {
