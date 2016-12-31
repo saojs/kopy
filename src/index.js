@@ -28,7 +28,9 @@ export default function kopy(src, dest, {
 
     pipe
       .source('.')
-      .ignore(file => /node_modules/.test(file))
+      .ignore(file => {
+        return /node_modules/.test(file) || /\.DS_Store$/.test(file)
+      })
       .use(ask(data, prompts))
       .use(filterFiles(filters))
 
