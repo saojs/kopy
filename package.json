@@ -47,7 +47,7 @@
     "inquirer": "^2.0.0",
     "is-binary-path": "^2.0.0",
     "jstransformer": "^1.0.0",
-    "jstransformer-ejs": "^0.0.3",
+    "jstransformer-lodash": "^0.3.1",
     "metalsmith": "^2.2.0",
     "minimatch": "^3.0.3",
     "multimatch": "^2.1.0",

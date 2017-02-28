@@ -4,7 +4,7 @@ import isBinaryPath from 'is-binary-path'
 
 export default ({
   skipInterpolation,
-  template = require('jstransformer-ejs'),
+  template = require('jstransformer-lodash'),
   templateOptions
 } = {}) => {
   return (files, metalsmith, done) => {
