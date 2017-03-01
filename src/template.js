@@ -5,7 +5,7 @@ import isBinaryPath from 'is-binary-path'
 export default ({
   skipInterpolation,
   template = require('jstransformer-lodash'),
-  templateOptions
+  templateOptions = {}
 } = {}) => {
   return (files, metalsmith, done) => {
     const keys = Object.keys(files)
