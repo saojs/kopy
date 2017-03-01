@@ -32,7 +32,7 @@ copy('./template', './dest', {
 
 ## Template Syntax
 
-Templates could use [lodash.template](https://lodash.com/docs/4.17.4#template) syntax or any template engine supported by [jstransformer](https://github.com/jstransformers)
+Templates could use [ejs](http://ejs.co) syntax or any template engine supported by [jstransformer](https://github.com/jstransformers)
 
 ## API
 
