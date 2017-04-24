@@ -144,6 +144,22 @@ copy(src, dest, {
 })
 ```
 
+##### move
+
+Type: `object`<br>
+Default: `undefined`
+
+Similar to `filters`, but instead of filtering files, it just renames the file:
+
+```js
+copt(src, dest, {
+  move: {
+    'gitignore': '.gitignore',
+    'folder/file.js': 'another/file.ts'
+  }
+})
+```
+
 ##### skipExisting
 
 Type: `function` `boolean`<br>

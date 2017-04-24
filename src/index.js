@@ -4,6 +4,7 @@ import filterFiles from './filter-files'
 import ask from './ask'
 import useTemplate from './template'
 import skip from './skip'
+import moveFiles from './move-files'
 
 export default function kopy(src, dest, {
   cwd = process.cwd(),
@@ -19,7 +20,8 @@ export default function kopy(src, dest, {
   // filter options
   filters,
   // skip existing file
-  skipExisting
+  skipExisting,
+  move
 } = {}) {
   return new Promise((resolve, reject) => {
     const source = path.resolve(cwd, src)
@@ -33,6 +35,7 @@ export default function kopy(src, dest, {
       })
       .use(ask(data, prompts))
       .use(filterFiles(filters))
+      .use(moveFiles(move))
 
     if (!disableInterpolation) {
       pipe.use(useTemplate({skipInterpolation, template, templateOptions}))

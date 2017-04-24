@@ -79,3 +79,13 @@ test('it returns metadata', async t => {
   })
   t.deepEqual(data, {wow: true})
 })
+
+test('it moves files', async t => {
+  const {files} = await copy('./fixture-src', './dest-move', {
+    disableInterpolation: true,
+    move: {
+      'deep/bye.json': 'so-deep/hi.json'
+    }
+  })
+  t.deepEqual(files, ['hi.json', 'so-deep/hi.json'])
+})
