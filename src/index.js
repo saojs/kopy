@@ -21,12 +21,21 @@ export default function kopy(src, dest, {
   filters,
   // skip existing file
   skipExisting,
-  move
+  move,
+  write = true
 } = {}) {
   return new Promise((resolve, reject) => {
     const source = path.resolve(cwd, src)
     const destPath = path.resolve(cwd, dest)
     const pipe = Metalsmith(source) // eslint-disable-line new-cap
+
+    const done = (err, files) => {
+      if (err) return reject(err)
+      resolve({
+        files,
+        ...pipe.metadata()
+      })
+    }
 
     pipe
       .source('.')
@@ -48,12 +57,11 @@ export default function kopy(src, dest, {
     pipe
       .clean(clean)
       .destination(destPath)
-      .build((err, files) => {
-        if (err) return reject(err)
-        resolve({
-          files,
-          ...pipe.metadata()
-        })
-      })
+
+    if (write === false) {
+      return pipe.process(done)
+    }
+
+    pipe.build(done)
   })
 }

@@ -175,6 +175,13 @@ copy(src, dest, {
 })
 ```
 
+##### write
+
+Type: `boolean`<br>
+Default: `true`
+
+Process files and write to disk.
+
 ---
 
 **kopy** © [EGOIST](https://github.com/egoist), Released under the [MIT](https://egoist.mit-license.org/) License.<br>
