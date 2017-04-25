@@ -20,7 +20,7 @@ test('main', async t => {
   t.true(res.has)
 
   // check files
-  t.deepEqual(files, ['hi.json', 'deep/bye.json'])
+  t.deepEqual(Object.keys(files), ['hi.json', 'deep/bye.json'])
 
   const foo = require('./dest/deep/bye')
   t.is(foo.name, 'hi')
@@ -61,7 +61,7 @@ test('it filters files', async t => {
       '*.json': 'false'
     }
   })
-  t.deepEqual(files, ['deep/bye.json'])
+  t.deepEqual(Object.keys(files), ['deep/bye.json'])
 })
 
 test('disableInterpolation', async t => {
@@ -87,5 +87,5 @@ test('it moves files', async t => {
       'deep/bye.json': 'so-deep/hi.json'
     }
   })
-  t.deepEqual(files, ['hi.json', 'so-deep/hi.json'])
+  t.deepEqual(Object.keys(files), ['hi.json', 'so-deep/hi.json'])
 })
