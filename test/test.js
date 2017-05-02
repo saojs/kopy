@@ -1,15 +1,22 @@
+/* eslint-disable import/no-unresolved */
 import fs from 'fs'
 import test from 'ava'
-import copy from '../src'
-import {spawnSync} from 'child_process'
 import rm from 'rimraf'
+import copy from '../src'
+
+const oldCwd = process.cwd()
+
+test.before(() => {
+  process.chdir(__dirname)
+})
 
 test.after('cleanup', () => {
   rm.sync('./dest*')
+  process.chdir(oldCwd)
 })
 
 test('main', async t => {
-  const {files} = await copy('./fixture-src', './dest', {
+  const { fileList } = await copy('./fixture-src', './dest', {
     data: {
       has: true,
       name: 'hi'
@@ -20,14 +27,14 @@ test('main', async t => {
   t.true(res.has)
 
   // check files
-  t.deepEqual(Object.keys(files), ['hi.json', 'deep/bye.json'])
+  t.deepEqual(fileList, ['deep/bye.json', 'hi.json'])
 
   const foo = require('./dest/deep/bye')
   t.is(foo.name, 'hi')
 })
 
 test('it should skip interpolation by glob patterns', async t => {
-  const {files} = await copy('./fixture-src', './dest-skip', {
+  await copy('./fixture-src', './dest-skip', {
     data: {
       name: 'hi',
       has: true
@@ -53,19 +60,20 @@ test('it supports custom template engine', async t => {
 })
 
 test('it filters files', async t => {
-  const {files} = await copy('./fixture-src', './dest-filter', {
+  const { fileList } = await copy('./fixture-src', './dest-filter', {
     data: {
-      name: 'foo'
+      name: 'foo',
+      has: true
     },
     filters: {
       '*.json': 'false'
     }
   })
-  t.deepEqual(Object.keys(files), ['deep/bye.json'])
+  t.deepEqual(fileList, ['deep/bye.json'])
 })
 
 test('disableInterpolation', async t => {
-  const {files} = await copy('./fixture-src', './dest-disableInterpolation', {
+  await copy('./fixture-src', './dest-disableInterpolation', {
     disableInterpolation: true
   })
   const foo = fs.readFileSync('./dest-disableInterpolation/hi.json')
@@ -73,19 +81,19 @@ test('disableInterpolation', async t => {
 })
 
 test('it returns metadata', async t => {
-  const {data} = await copy('./fixture-src', './dest-disableInterpolation', {
+  const { data } = await copy('./fixture-src', './dest-disableInterpolation', {
     disableInterpolation: true,
-    data: {wow: true}
+    data: { wow: true }
   })
-  t.deepEqual(data, {wow: true})
+  t.deepEqual(data, { wow: true })
 })
 
 test('it moves files', async t => {
-  const {files} = await copy('./fixture-src', './dest-move', {
+  const { fileList } = await copy('./fixture-src', './dest-move', {
     disableInterpolation: true,
     move: {
       'deep/bye.json': 'so-deep/hi.json'
     }
   })
-  t.deepEqual(Object.keys(files), ['hi.json', 'so-deep/hi.json'])
+  t.deepEqual(fileList, ['hi.json', 'so-deep/hi.json'])
 })

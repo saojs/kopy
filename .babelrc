@@ -1,9 +1,23 @@
 {
-  "presets": [["es2015", {"modules": false}], "stage-2"],
-  "plugins": ["transform-async-to-generator"],
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "node": 4
+      }
+    }],
+    "stage-2"
+  ],
   "env": {
     "test": {
-      "presets": ["es2015", "stage-2"]
+      "presets": [
+        ["env", {
+          "targets": {
+            "node": "current"
+          }
+        }],
+        "stage-2"
+      ]
     }
   }
 }

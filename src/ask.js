@@ -1,9 +1,9 @@
 import inquirer from 'inquirer'
 
 export default function ask(data, prompts) {
-  return (files, metalsmith, done) => {
+  return ctx => {
     if (prompts) {
-      inquirer.prompt(prompts)
+      return inquirer.prompt(prompts)
         .then(answers => {
           const merged = Object.assign({}, data, answers)
 
@@ -14,16 +14,14 @@ export default function ask(data, prompts) {
             }
           }
 
-          metalsmith.metadata({data, answers, merged})
-          done()
+          ctx.meta = { data, answers, merged }
         })
-        .catch(done)
-    } else if (data) {
-      metalsmith.metadata({data, merged: data})
-      done()
+    }
+
+    if (data) {
+      ctx.meta = { data, merged: data }
     } else {
-      metalsmith.metadata({merged: {}})
-      done()
+      ctx.meta = { merged: {} }
     }
   }
 }

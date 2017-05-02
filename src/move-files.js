@@ -1,21 +1,19 @@
 import minimatch from 'minimatch'
 
 export default function (move) {
-  return function (files, metalsmith, done) {
-    if (!move) return done()
+  return ctx => {
+    if (!move) return
 
     for (const pattern in move) {
-      const matches = minimatch.match(Object.keys(files), pattern)
+      const matches = minimatch.match(ctx.fileList, pattern)
       if (matches.length > 0) {
-        const content = files[matches[0]]
+        const file = ctx.file(matches[0])
         for (const match of matches) {
-          delete files[match]
+          ctx.deleteFile(match)
         }
         const newName = move[pattern]
-        files[newName] = content
+        ctx.createFile(newName, file)
       }
     }
-
-    done()
   }
 }

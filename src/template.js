@@ -1,4 +1,3 @@
-import asyncEach from 'async.each'
 import match from 'multimatch'
 import isBinaryPath from 'is-binary-path'
 
@@ -7,34 +6,33 @@ export default ({
   template = require('jstransformer-ejs'),
   templateOptions = {}
 } = {}) => {
-  return (files, metalsmith, done) => {
-    const keys = Object.keys(files)
+  return ctx => {
+    const fileList = ctx.fileList
     let matchedFile
     if (skipInterpolation) {
       if (typeof skipInterpolation === 'function') {
         matchedFile = skipInterpolation
       } else {
-        const matches = match(keys, skipInterpolation)
+        const matches = match(fileList, skipInterpolation)
         matchedFile = file => matches.indexOf(file) !== -1
       }
     }
 
-    asyncEach(keys, run, done)
+    return Promise.all(fileList.map(relative => run(relative)))
 
-    function run(file, done) {
-      const content = files[file].contents.toString()
+    function run(file) {
+      const content = ctx.fileContents(file)
 
       const shouldSkip = matchedFile && matchedFile(file, content)
 
       // we skip unmathed files (by multimatch or your own function)
       // and binary files
       if (shouldSkip || isBinaryPath(file)) {
-        return done()
+        return
       }
 
-      const res = require('jstransformer')(template).render(content, templateOptions, metalsmith.metadata().merged)
-      files[file].contents = new Buffer(res.body)
-      done()
+      const res = require('jstransformer')(template).render(content, templateOptions, ctx.meta.merged)
+      ctx.writeContents(file, res.body)
     }
   }
 }

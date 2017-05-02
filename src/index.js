@@ -1,5 +1,5 @@
 import path from 'path'
-import Metalsmith from 'metalsmith'
+import majo from 'majo'
 import filterFiles from './filter-files'
 import ask from './ask'
 import useTemplate from './template'
@@ -24,44 +24,39 @@ export default function kopy(src, dest, {
   move,
   write = true
 } = {}) {
-  return new Promise((resolve, reject) => {
-    const source = path.resolve(cwd, src)
-    const destPath = path.resolve(cwd, dest)
-    const pipe = Metalsmith(source) // eslint-disable-line new-cap
+  const destPath = path.resolve(cwd, dest)
+  const base = path.resolve(cwd, src)
 
-    const done = (err, files) => {
-      if (err) return reject(err)
-      resolve({
-        files,
-        ...pipe.metadata()
-      })
-    }
-
-    pipe
-      .source('.')
-      .ignore(file => {
-        return /\.DS_Store$/.test(file)
-      })
-      .use(ask(data, prompts))
-      .use(filterFiles(filters))
-      .use(moveFiles(move))
-
-    if (!disableInterpolation) {
-      pipe.use(useTemplate({skipInterpolation, template, templateOptions}))
-    }
-
-    if (skipExisting) {
-      pipe.use(skip(skipExisting, destPath))
-    }
-
-    pipe
-      .clean(clean)
-      .destination(destPath)
-
-    if (write === false) {
-      return pipe.process(done)
-    }
-
-    pipe.build(done)
+  const done = stream => ({
+    files: stream.files,
+    fileList: stream.fileList,
+    ...stream.meta
   })
+
+  const stream = majo()
+
+  stream
+    .source('**', { cwd: base })
+    .filter(file => {
+      return !/\.DS_Store$/.test(file)
+    })
+    .use(ask(data, prompts))
+    .use(filterFiles(filters))
+    .use(moveFiles(move))
+
+  if (!disableInterpolation) {
+    stream.use(useTemplate({ skipInterpolation, template, templateOptions }))
+  }
+
+  if (skipExisting) {
+    stream.use(skip(skipExisting, destPath))
+  }
+
+  if (write === false) {
+    return stream.process()
+      .then(() => done(stream))
+  }
+
+  return stream.dest(destPath, { clean })
+    .then(() => done(stream))
 }

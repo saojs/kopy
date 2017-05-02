@@ -2,18 +2,18 @@ import path from 'path'
 import exists from 'path-exists'
 
 export default function (skipExisting, destPath) {
-  return function (files, metalsmith, done) {
-    Promise.all(Object.keys(files).map(name => {
+  return ctx => {
+    return Promise.all(ctx.fileList.map(name => {
       const location = path.join(destPath, name)
       return exists(location)
         .then(yes => {
           if (yes) {
-            delete files[name]
+            ctx.deleteFile(name)
             if (typeof skipExisting === 'function') {
-              skipExisting(location)
+              skipExisting(location, name)
             }
           }
         })
-    })).then(() => done()).catch(done)
+    }))
   }
 }
