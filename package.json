@@ -49,7 +49,6 @@
     "jstransformer": "^1.0.0",
     "jstransformer-ejs": "^0.0.3",
     "majo": "^0.2.3",
-    "metalsmith": "^2.2.0",
     "minimatch": "^3.0.3",
     "multimatch": "^2.1.0",
     "path-exists": "^3.0.0"
