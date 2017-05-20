@@ -5,6 +5,7 @@ export default function ask(data, prompts) {
     if (prompts) {
       return inquirer.prompt(prompts)
         .then(answers => {
+          data = typeof data === 'function' ? data(answers) : data
           const merged = Object.assign({}, data, answers)
 
           // prevent from ReferenceErrors

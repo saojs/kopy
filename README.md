@@ -93,10 +93,12 @@ Current working directory.
 
 ##### data
 
-Type: `object`<br>
+Type: `object` `function`<br>
 Default: `undefined`
 
 The data to render templates in source directory.
+
+If it's a function, we use its return value as `data`, and the first arguments is `answers`.
 
 ##### prompts
 
