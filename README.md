@@ -71,9 +71,11 @@ copy(src, dest, {
 
 ##### templateOptions
 
-Type: `object`
+Type: `object` `function`
 
 The template engine options.
+
+If it's a function we use the return value as `templateOptions`, and the first argument is `{ answers, data, merged }`.
 
 ##### clean
 

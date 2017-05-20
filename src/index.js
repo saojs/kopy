@@ -45,7 +45,11 @@ export default function kopy(src, dest, {
     .use(moveFiles(move))
 
   if (!disableInterpolation) {
-    stream.use(useTemplate({ skipInterpolation, template, templateOptions }))
+    stream.use(useTemplate({
+      skipInterpolation,
+      template,
+      templateOptions: typeof templateOptions === 'function' ? templateOptions(stream.meta) : templateOptions
+    }))
   }
 
   if (skipExisting) {
