@@ -48,7 +48,7 @@ export default function kopy(src, dest, {
     stream.use(useTemplate({
       skipInterpolation,
       template,
-      templateOptions: typeof templateOptions === 'function' ? templateOptions(stream.meta) : templateOptions
+      templateOptions
     }))
   }
 

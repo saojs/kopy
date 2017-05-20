@@ -7,6 +7,8 @@ export default ({
   templateOptions = {}
 } = {}) => {
   return ctx => {
+    templateOptions = typeof templateOptions === 'function' ? templateOptions(ctx.meta) : templateOptions
+
     const fileList = ctx.fileList
     let matchedFile
     if (skipInterpolation) {
