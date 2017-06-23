@@ -6,6 +6,10 @@ export default function filterFiles(filters) {
   return ctx => {
     if (!filters) return
 
+    if (typeof filters === 'function') {
+      filters = filters(ctx.meta.merged)
+    }
+
     const fileList = ctx.fileList
     const data = ctx.meta.merged
 

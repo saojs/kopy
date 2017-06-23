@@ -134,7 +134,7 @@ Similar to `skipInterpolation`, but `disableInterpolation` disables all template
 
 ##### filters
 
-Type: `object`<br>
+Type: `object` `function`<br>
 Default: `undefined`
 
 An object containing file filter rules, the key of each entry is a minimatch pattern, and its value is a JavaScript expression evaluated in the context of (prompt answers) data:
@@ -148,9 +148,11 @@ copy(src, dest, {
 })
 ```
 
+If it's a function, the first argument of it would be the result of `data` merging with prompt answers.
+
 ##### move
 
-Type: `object`<br>
+Type: `object` `function`<br>
 Default: `undefined`
 
 Similar to `filters`, but instead of filtering files, it just renames the file:
@@ -163,6 +165,8 @@ copt(src, dest, {
   }
 })
 ```
+
+If it's a function, the first argument of it would be the result of `data` merging with prompt answers.
 
 ##### skipExisting
 

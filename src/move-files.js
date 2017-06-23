@@ -4,6 +4,10 @@ export default function (move) {
   return ctx => {
     if (!move) return
 
+    if (typeof move === 'function') {
+      move = move(ctx.meta.merged)
+    }
+
     for (const pattern in move) {
       const matches = minimatch.match(ctx.fileList, pattern)
       if (matches.length > 0) {
