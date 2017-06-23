@@ -158,7 +158,7 @@ Default: `undefined`
 Similar to `filters`, but instead of filtering files, it just renames the file:
 
 ```js
-copt(src, dest, {
+copy(src, dest, {
   move: {
     'gitignore': '.gitignore',
     'folder/file.js': 'another/file.ts'
