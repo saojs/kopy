@@ -32,24 +32,24 @@
     "folder"
   ],
   "devDependencies": {
-    "ava": "latest",
-    "babel-preset-env": "^1.4.0",
+    "ava": "^0.20.0",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.18.0",
-    "bili": "^0.14.2",
+    "bili": "^0.16.0",
     "ejs": "^2.5.5",
-    "eslint-config-rem": "^3.0.1",
+    "eslint-config-rem": "^3.1.0",
     "jstransformer-handlebars": "^1.0.0",
     "rimraf": "^2.5.4",
     "rollup-plugin-babel": "^2.7.1",
-    "xo": "^0.18.1"
+    "xo": "^0.18.2"
   },
   "dependencies": {
-    "inquirer": "^3.0.6",
+    "inquirer": "^3.1.1",
     "is-binary-path": "^2.0.0",
     "jstransformer": "^1.0.0",
     "jstransformer-ejs": "^0.0.3",
-    "majo": "^0.2.3",
-    "minimatch": "^3.0.3",
+    "majo": "^0.4.0",
+    "minimatch": "^3.0.4",
     "multimatch": "^2.1.0",
     "path-exists": "^3.0.0"
   },

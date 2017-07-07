@@ -30,7 +30,7 @@ export default function kopy(src, dest, {
   const stream = majo()
 
   stream
-    .source('**', { cwd: base })
+    .source('**', { baseDir: base })
     .filter(file => {
       return !/\.DS_Store$/.test(file)
     })
