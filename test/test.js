@@ -81,7 +81,7 @@ test('disableInterpolation', async t => {
 })
 
 test('it returns metadata', async t => {
-  const { data } = await copy('./fixture-src', './dest-disableInterpolation', {
+  const { meta: { data } } = await copy('./fixture-src', './dest-disableInterpolation', {
     disableInterpolation: true,
     data: { wow: true }
   })
