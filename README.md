@@ -38,7 +38,7 @@ Templates could use [ejs](http://ejs.co) syntax or any template engine supported
 
 ### copy(src, dest, options)
 
-Returns a Promise which resolve `{files, data, answers, merged}`, `merged` is the result of answers of `answers` merged with `data`.
+Returns a Promise resolving the [`majo`](https://github.com/egoist/majo) instance we use. 
 
 #### src
 

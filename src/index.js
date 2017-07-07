@@ -27,12 +27,6 @@ export default function kopy(src, dest, {
   const destPath = path.resolve(cwd, dest)
   const base = path.resolve(cwd, src)
 
-  const done = stream => ({
-    files: stream.files,
-    fileList: stream.fileList,
-    ...stream.meta
-  })
-
   const stream = majo()
 
   stream
@@ -58,9 +52,9 @@ export default function kopy(src, dest, {
 
   if (write === false) {
     return stream.process()
-      .then(() => done(stream))
+      .then(() => stream)
   }
 
   return stream.dest(destPath, { clean })
-    .then(() => done(stream))
+    .then(() => stream)
 }
