@@ -40,6 +40,19 @@ Templates could use [ejs](http://ejs.co) syntax or any template engine supported
 
 Returns a Promise resolving the [`majo`](https://github.com/egoist/majo) instance we use. 
 
+```js
+copy(...args)
+  .then(stream => {
+    // stream is a majo instance
+    // answers for prompts (if any)
+    stream.meta.answers
+    // options.data basically
+    stream.meta.data
+    // merged 'answers' and 'data'
+    stream.meta.merged
+  })
+```
+
 #### src
 
 Type: `string`<br>
