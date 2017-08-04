@@ -89,11 +89,13 @@ test('it returns metadata', async t => {
 })
 
 test('it moves files', async t => {
-  const { fileList } = await copy('./fixture-src', './dest-move', {
+  const { fileList } = await copy('./fixture-move', './dest-move', {
     disableInterpolation: true,
     move: {
-      'deep/bye.json': 'so-deep/hi.json'
-    }
+      'foo-*.json': 'foo.json',
+      'ba*': filepath => filepath.replace(/^ba/, 'ab')
+    },
+    write: false
   })
-  t.deepEqual(fileList, ['hi.json', 'so-deep/hi.json'])
+  t.snapshot(fileList, 'generated files')
 })

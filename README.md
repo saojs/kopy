@@ -181,6 +181,17 @@ copy(src, dest, {
 
 If it's a function, the first argument of it would be the result of `data` merging with prompt answers.
 
+The value of each entry should be a file path or a function will returns a file path:
+
+```js
+copy(src, dest, {
+  move: {
+    'foo.*': 'foo.js',
+    'bar-*.js': filepath => filepath.replace(/^bar-/, 'bar/')
+  }
+})
+```
+
 ##### skipExisting
 
 Type: `function` `boolean`<br>
