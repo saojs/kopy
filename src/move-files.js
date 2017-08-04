@@ -16,6 +16,7 @@ export default function (move) {
           for (const match of matches) {
             const file = ctx.file(match)
             const fileName = newName(match)
+            // eslint-disable-next-line max-depth
             if (fileName) {
               ctx.deleteFile(match)
               ctx.createFile(fileName, file)
