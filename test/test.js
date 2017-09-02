@@ -39,9 +39,7 @@ test('it should skip interpolation by glob patterns', async t => {
       name: 'hi',
       has: true
     },
-    skipInterpolation: [
-      'deep/bye.*'
-    ]
+    skipInterpolation: ['deep/bye.*']
   })
   const bar = require('./dest-skip/deep/bye')
   t.is(bar.name, '<%= name %>')
@@ -81,7 +79,9 @@ test('disableInterpolation', async t => {
 })
 
 test('it returns metadata', async t => {
-  const { meta: { data } } = await copy('./fixture-src', './dest-disableInterpolation', {
+  const {
+    meta: { data }
+  } = await copy('./fixture-src', './dest-disableInterpolation', {
     disableInterpolation: true,
     data: { wow: true }
   })
@@ -98,4 +98,25 @@ test('it moves files', async t => {
     write: false
   })
   t.snapshot(fileList, 'generated files')
+})
+
+test('mock prompts', async t => {
+  await t.throws(
+    copy('./fixture-mock', './dest-mock', {
+      prompts: [{ name: 'foo', validate: v => v === 'foo' }],
+      mockPrompts: {
+        foo: 'bar'
+      }
+    }),
+    'Validation failed at prompt: "foo"'
+  )
+
+  const res = await copy('./fixture-mock', './dest-mock', {
+    prompts: [
+      { name: 'foo', type: 'confirm' },
+      { name: 'bar', type: 'confirm', default: false }
+    ],
+    mockPrompts: {}
+  })
+  t.deepEqual(res.meta.answers, { foo: true, bar: false })
 })

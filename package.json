@@ -10,11 +10,11 @@
     "url": "github.com/egoist"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
-    "test": "NODE_ENV=test ava && xo && rm -rf test/dest && npm run build",
-    "build": "bili --js babel",
+    "test": "ava && xo && rm -rf test/dest && npm run build",
+    "build": "bili --buble.target.node 6",
     "example": "npm run build && mkdir -p dist-example && cd dist-example && node ../example.js"
   },
   "watch": {
@@ -32,19 +32,19 @@
     "folder"
   ],
   "devDependencies": {
-    "ava": "^0.21.0",
+    "ava": "^0.22.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.18.0",
-    "bili": "^0.17.4",
+    "bili": "^0.18.1",
     "ejs": "^2.5.7",
     "eslint-config-rem": "^3.2.0",
     "jstransformer-handlebars": "^1.0.0",
     "rimraf": "^2.5.4",
-    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-babel": "^3.0.2",
     "xo": "^0.18.2"
   },
   "dependencies": {
-    "inquirer": "^3.2.1",
+    "inquirer": "^3.2.3",
     "is-binary-path": "^2.0.0",
     "jstransformer": "^1.0.0",
     "jstransformer-ejs": "^0.0.3",
@@ -59,7 +59,7 @@
     ]
   },
   "xo": {
-    "extends": "rem",
+    "extends": "rem/prettier",
     "rules": {
       "guard-for-in": 0
     }

@@ -6,24 +6,29 @@ import useTemplate from './template'
 import skip from './skip'
 import moveFiles from './move-files'
 
-export default function kopy(src, dest, {
-  cwd = process.cwd(),
-  clean = false,
-  // ask options
-  data,
-  prompts,
-  // template options
-  disableInterpolation = false,
-  skipInterpolation,
-  template,
-  templateOptions,
-  // filter options
-  filters,
-  // skip existing file
-  skipExisting,
-  move,
-  write = true
-} = {}) {
+export default function kopy(
+  src,
+  dest,
+  {
+    cwd = process.cwd(),
+    clean = false,
+    // ask options
+    data,
+    prompts,
+    mockPrompts,
+    // template options
+    disableInterpolation = false,
+    skipInterpolation,
+    template,
+    templateOptions,
+    // filter options
+    filters,
+    // skip existing file
+    skipExisting,
+    move,
+    write = true
+  } = {}
+) {
   const destPath = path.resolve(cwd, dest)
   const base = path.resolve(cwd, src)
 
@@ -34,16 +39,30 @@ export default function kopy(src, dest, {
     .filter(file => {
       return !/\.DS_Store$/.test(file)
     })
-    .use(ask(data, prompts))
+    .use(ask(prompts, mockPrompts))
+    .use(ctx => {
+      data =
+        typeof data === 'function' ? data(ctx.meta && ctx.meta.answers) : data
+      ctx.meta = {
+        ...ctx.meta,
+        data,
+        merged: {
+          ...ctx.meta.answers,
+          ...data
+        }
+      }
+    })
     .use(filterFiles(filters))
     .use(moveFiles(move))
 
   if (!disableInterpolation) {
-    stream.use(useTemplate({
-      skipInterpolation,
-      template,
-      templateOptions
-    }))
+    stream.use(
+      useTemplate({
+        skipInterpolation,
+        template,
+        templateOptions
+      })
+    )
   }
 
   if (skipExisting) {
@@ -51,10 +70,8 @@ export default function kopy(src, dest, {
   }
 
   if (write === false) {
-    return stream.process()
-      .then(() => stream)
+    return stream.process().then(() => stream)
   }
 
-  return stream.dest(destPath, { clean })
-    .then(() => stream)
+  return stream.dest(destPath, { clean }).then(() => stream)
 }

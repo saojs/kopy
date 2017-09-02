@@ -1,13 +1,18 @@
 import match from 'multimatch'
 import isBinaryPath from 'is-binary-path'
 
-export default ({
-  skipInterpolation,
-  template = require('jstransformer-ejs'),
-  templateOptions = {}
-} = {}) => {
+export default (
+  {
+    skipInterpolation,
+    template = require('jstransformer-ejs'),
+    templateOptions = {}
+  } = {}
+) => {
   return ctx => {
-    templateOptions = typeof templateOptions === 'function' ? templateOptions(ctx.meta) : templateOptions
+    templateOptions =
+      typeof templateOptions === 'function'
+        ? templateOptions(ctx.meta)
+        : templateOptions
 
     const fileList = ctx.fileList
     let matchedFile
@@ -33,7 +38,11 @@ export default ({
         return
       }
 
-      const res = require('jstransformer')(template).render(content, templateOptions, ctx.meta.merged)
+      const res = require('jstransformer')(template).render(
+        content,
+        templateOptions,
+        ctx.meta.merged
+      )
       ctx.writeContents(file, res.body)
     }
   }

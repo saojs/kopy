@@ -109,7 +109,7 @@ Current working directory.
 Type: `object` `function`<br>
 Default: `undefined`
 
-The data to render templates in source directory.
+The data to be used in rendering templates in source directory, filter files etc.
 
 If it's a function, we use its return value as `data`, and the first arguments is `answers`.
 
@@ -120,6 +120,26 @@ Default: `undefined`
 
 [inquirer](https://github.com/SBoudrias/Inquirer.js) prompts, the answers of prompts will be assigned to `data`
 
+
+##### mockPrompts
+
+Type: `Object`
+
+An object of mocked prompt values, eg:
+
+```js
+{
+  prompts: [
+    { name: 'foo', message: 'type foo', validate: v => v === 'foo' },
+    { name: 'hey', message: 'type hey' }
+  ],
+  mockPrompts: {
+    foo: 'bar'
+  }
+}
+```
+
+In the above case, we will not run prompts to get answers from users, instead we use set `foo`'s value to `bar` and validate it. And in this case it will throw since `'bar' !== 'foo'`. The value of `hey` would be `undefined`.
 
 ##### skipInterpolation
 

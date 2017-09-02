@@ -1,6 +1,6 @@
 import minimatch from 'minimatch'
 
-export default function (move) {
+export default function(move) {
   return ctx => {
     if (typeof move === 'function') {
       move = move(ctx.meta.merged)
