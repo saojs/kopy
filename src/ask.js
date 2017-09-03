@@ -30,8 +30,11 @@ async function getMockedAnswers(mockPrompts, prompts) {
       let res = prompt.validate(answers[name], answers)
       // eslint-disable-next-line no-await-in-loop
       res = res.then ? await res : res
-      if (!res) {
-        throw new Error(`Validation failed at prompt: "${name}"`)
+      if (typeof res === 'string') {
+        // eslint-disable-next-line unicorn/prefer-type-error
+        throw new Error(`Validation failed at prompt "${name}":\n${res}`)
+      } else if (!res) {
+        throw new Error(`Validation failed at prompt "${name}"`)
       }
     }
   }

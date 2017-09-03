@@ -108,7 +108,17 @@ test('mock prompts', async t => {
         foo: 'bar'
       }
     }),
-    'Validation failed at prompt: "foo"'
+    'Validation failed at prompt "foo"'
+  )
+
+  await t.throws(
+    copy('./fixture-mock', './dest-mock', {
+      prompts: [{ name: 'foo', validate: () => 'nah' }],
+      mockPrompts: {
+        foo: 'bar'
+      }
+    }),
+    'Validation failed at prompt "foo":\nnah'
   )
 
   const res = await copy('./fixture-mock', './dest-mock', {
