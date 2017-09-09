@@ -1,6 +1,6 @@
 {
   "name": "kopy",
-  "version": "8.2.1",
+  "version": "8.2.2",
   "description": "Gracefully copy a directory and render templates.",
   "license": "MIT",
   "repository": "egoist/kopy",
@@ -56,7 +56,9 @@
     "require": [
       "babel-register"
     ],
-    "files": ["test/test.js"]
+    "files": [
+      "test/test.js"
+    ]
   },
   "xo": {
     "extends": "rem/prettier",
