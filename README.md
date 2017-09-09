@@ -72,7 +72,7 @@ Destination directory.
 ##### glob
 
 Type: `Array` `string`<br>
-Default: `'**', '!**/node_modules/**'`
+Default: `['**', '!**/node_modules/**']`
 
 Use the glob pattern(s) to find files in `src` directory.
 
