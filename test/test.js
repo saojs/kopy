@@ -58,16 +58,13 @@ test('it supports custom template engine', async t => {
 })
 
 test('it filters files', async t => {
-  const { fileList } = await copy('./fixture-src', './dest-filter', {
-    data: {
-      name: 'foo',
-      has: true
-    },
+  const { fileList } = await copy('./fixture-filter', './dest-filter', {
     filters: {
-      '*.json': 'false'
+      'foo/**': false,
+      'bar.js': '!!12'
     }
   })
-  t.deepEqual(fileList, ['deep/bye.json'])
+  t.deepEqual(fileList, ['bar.js'])
 })
 
 test('disableInterpolation', async t => {

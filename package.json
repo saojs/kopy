@@ -55,7 +55,8 @@
   "ava": {
     "require": [
       "babel-register"
-    ]
+    ],
+    "files": ["test/test.js"]
   },
   "xo": {
     "extends": "rem/prettier",
