@@ -10,6 +10,7 @@ export default function kopy(
   src,
   dest,
   {
+    glob = ['**', '!**/node_modules/**'],
     cwd = process.cwd(),
     clean = false,
     // ask options
@@ -35,7 +36,7 @@ export default function kopy(
   const stream = majo()
 
   stream
-    .source('**', { baseDir: base })
+    .source(glob, { baseDir: base })
     .filter(file => {
       return !/\.DS_Store$/.test(file)
     })

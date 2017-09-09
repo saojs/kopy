@@ -127,3 +127,10 @@ test('mock prompts', async t => {
   })
   t.deepEqual(res.meta.answers, { foo: true, bar: false })
 })
+
+test('glob option', async t => {
+  const { fileList } = await copy('./fixture-glob', './dest-glob', {
+    glob: 'foo/*.js'
+  })
+  t.deepEqual(fileList, ['foo/bar.js'])
+})

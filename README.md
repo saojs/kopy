@@ -69,6 +69,13 @@ Destination directory.
 
 #### options
 
+##### glob
+
+Type: `Array` `string`<br>
+Default: `'**', '!**/node_modules/**'`
+
+Use the glob pattern(s) to find files in `src` directory.
+
 ##### template
 
 Type: `object`<br>
