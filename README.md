@@ -6,7 +6,7 @@
 
 ## Why is this useful?
 
-This could be used to build a scaffolding tool like [yeoman](https://github.com/yeoman/yeoman) or [vue-cli](https://github.com/vuejs/vue-cli).
+This could be used to build a scaffolding tool like [yeoman](https://github.com/yeoman/yeoman) or [vue-cli](https://github.com/vuejs/vue-cli), and it's actually used by [SAO](https://github.com/saojs/sao).
 
 ## Install
 
