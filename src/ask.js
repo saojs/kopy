@@ -8,11 +8,12 @@ async function getMockedAnswers(mockPrompts, prompts) {
 
     if (Object.hasOwnProperty.call(mockPrompts, prompt.name)) {
       answers[name] = mockPrompts[prompt.name]
+    } else if (typeof prompt.default === 'function') {
+      const res = prompt.default(answers)
+      // eslint-disable-next-line no-await-in-loop
+      answers[name] = res.then ? await res : res
     } else {
-      answers[name] =
-        typeof prompt.default === 'function'
-          ? prompt.default(answers)
-          : prompt.default
+      answers[name] = prompt.default
     }
 
     if (prompt.type === 'confirm' && typeof answers[name] === 'undefined') {
