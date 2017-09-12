@@ -122,7 +122,7 @@ test('mock prompts', async t => {
     prompts: [
       { name: 'foo', type: 'confirm' },
       { name: 'bar', type: 'confirm', default: false },
-      { name: 'promise', default: async answers => 'foo-bar' }
+      { name: 'promise', default: async () => 'foo-bar' }
     ],
     mockPrompts: {}
   })
