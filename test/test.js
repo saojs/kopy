@@ -121,11 +121,12 @@ test('mock prompts', async t => {
   const res = await copy('./fixture-mock', './dest-mock', {
     prompts: [
       { name: 'foo', type: 'confirm' },
-      { name: 'bar', type: 'confirm', default: false }
+      { name: 'bar', type: 'confirm', default: false },
+      { name: 'promise', default: async answers => 'foo-bar' }
     ],
     mockPrompts: {}
   })
-  t.deepEqual(res.meta.answers, { foo: true, bar: false })
+  t.deepEqual(res.meta.answers, { foo: true, bar: false, promise: 'foo-bar' })
 })
 
 test('glob option', async t => {
