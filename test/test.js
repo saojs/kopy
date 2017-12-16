@@ -103,7 +103,8 @@ test('mock prompts', async t => {
       prompts: [{ name: 'foo', validate: v => v === 'foo' }],
       mockPrompts: {
         foo: 'bar'
-      }
+      },
+      write: false
     }),
     'Validation failed at prompt "foo"'
   )
@@ -113,7 +114,8 @@ test('mock prompts', async t => {
       prompts: [{ name: 'foo', validate: () => 'nah' }],
       mockPrompts: {
         foo: 'bar'
-      }
+      },
+      write: false
     }),
     'Validation failed at prompt "foo":\nnah'
   )
@@ -121,17 +123,19 @@ test('mock prompts', async t => {
   const res = await copy('./fixture-mock', './dest-mock', {
     prompts: [
       { name: 'foo', type: 'confirm' },
-      { name: 'bar', type: 'confirm', default: false },
+      { name: 'bar', type: 'confirm', default: true },
       { name: 'promise', default: async () => 'foo-bar' }
     ],
+    write: false,
     mockPrompts: {}
   })
-  t.deepEqual(res.meta.answers, { foo: true, bar: false, promise: 'foo-bar' })
+  t.deepEqual(res.meta.answers, { foo: false, bar: true, promise: 'foo-bar' })
 })
 
 test('glob option', async t => {
   const { fileList } = await copy('./fixture-glob', './dest-glob', {
-    glob: 'foo/*.js'
+    glob: 'foo/*.js',
+    write: false
   })
   t.deepEqual(fileList, ['foo/bar.js'])
 })

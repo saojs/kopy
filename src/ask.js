@@ -17,7 +17,7 @@ async function getMockedAnswers(mockPrompts, prompts) {
     }
 
     if (prompt.type === 'confirm' && typeof answers[name] === 'undefined') {
-      answers[name] = true
+      answers[name] = false
     }
 
     // Filter
