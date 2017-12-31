@@ -1,6 +1,6 @@
 {
   "name": "kopy",
-  "version": "8.2.4",
+  "version": "8.2.5",
   "description": "Gracefully copy a directory and render templates.",
   "license": "MIT",
   "repository": "egoist/kopy",
