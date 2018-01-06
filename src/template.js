@@ -1,5 +1,6 @@
 import match from 'multimatch'
 import isBinaryPath from 'is-binary-path'
+import { arrify } from './utils'
 
 export default (
   {
@@ -24,9 +25,7 @@ export default (
 
     let shouldSkip
     if (skipInterpolation) {
-      skipInterpolation = Array.isArray(skipInterpolation)
-        ? skipInterpolation
-        : [skipInterpolation]
+      skipInterpolation = arrify(skipInterpolation)
       shouldSkip = filepath =>
         skipInterpolation.some(condition => {
           if (typeof condition === 'string' || Array.isArray(condition)) {

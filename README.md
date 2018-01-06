@@ -219,6 +219,26 @@ copy(src, dest, {
 })
 ```
 
+##### transforms
+
+Type: `object`<br>
+Default: `undefined`
+
+Transform files in the way you like instead of rendering with specific template engine.
+
+```js
+copy(src, dest, {
+  transforms: {
+    // Transform JS files with babel
+    '**/*.js'(relativePath, stream) {
+      const contents = stream.fileContents(relativePath)
+      const { code } = babel.transform(contents)
+      stream.writeContents(relativePath, code)
+    }
+  }
+})
+```
+
 ##### skipExisting
 
 Type: `function` `boolean`<br>

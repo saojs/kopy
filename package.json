@@ -32,7 +32,7 @@
     "folder"
   ],
   "devDependencies": {
-    "ava": "^0.22.0",
+    "ava": "^0.24.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.18.0",
     "bili": "^0.18.1",

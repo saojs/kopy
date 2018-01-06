@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`generated files 1`] = `
-Array [
-  "ab.json",
-  "abr.json",
-  "foo.json",
-]
-`;

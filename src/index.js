@@ -5,6 +5,8 @@ import ask from './ask'
 import useTemplate from './template'
 import skip from './skip'
 import moveFiles from './move-files'
+import transform from './transform'
+import { arrify } from './utils'
 
 export default function kopy(
   src,
@@ -22,6 +24,7 @@ export default function kopy(
     skipInterpolation,
     template,
     templateOptions,
+    transforms,
     // filter options
     filters,
     // skip existing file
@@ -59,11 +62,18 @@ export default function kopy(
   if (!disableInterpolation) {
     stream.use(
       useTemplate({
-        skipInterpolation,
+        skipInterpolation: [
+          ...arrify(skipInterpolation),
+          ...(transforms ? Object.keys(transforms) : [])
+        ],
         template,
         templateOptions
       })
     )
+  }
+
+  if (transforms && Object.keys(transforms).length > 0) {
+    stream.use(transform(transforms))
   }
 
   if (skipExisting) {

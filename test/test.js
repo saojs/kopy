@@ -139,3 +139,26 @@ test('glob option', async t => {
   })
   t.deepEqual(fileList, ['foo/bar.js'])
 })
+
+test('transforms', async t => {
+  const stream = await copy('./fixture-transforms', './dest-transforms', {
+    data: {
+      haha: 'haha'
+    },
+    transforms: {
+      '*.x.js'(relative, stream) {
+        const file = stream.file(relative)
+        const newRelative = relative.replace(/\.js$/, '.json')
+        const newContent = JSON.stringify(require(file.path))
+        stream.deleteFile(relative)
+        stream.createFile(newRelative, {
+          contents: Buffer.from(newContent)
+        })
+      }
+    },
+    write: false
+  })
+  t.snapshot(stream.fileList)
+  t.snapshot(stream.fileContents('foo.js'), 'foo.js')
+  t.snapshot(stream.fileContents('bar.x.json'), 'bar.x.json')
+})
