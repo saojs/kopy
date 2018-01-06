@@ -14,36 +14,45 @@ export default (
         ? templateOptions(ctx.meta)
         : templateOptions
 
-    const fileList = ctx.fileList
-    let matchedFile
-    if (skipInterpolation) {
-      if (typeof skipInterpolation === 'function') {
-        matchedFile = skipInterpolation
-      } else {
-        const matches = match(fileList, skipInterpolation)
-        matchedFile = file => matches.indexOf(file) !== -1
-      }
-    }
-
-    return Promise.all(fileList.map(relative => run(relative)))
-
-    function run(file) {
-      const content = ctx.fileContents(file)
-
-      const shouldSkip = matchedFile && matchedFile(file, content)
-
-      // we skip unmathed files (by multimatch or your own function)
-      // and binary files
-      if (shouldSkip || isBinaryPath(file)) {
-        return
-      }
-
-      const res = require('jstransformer')(template).render(
+    const render = (content, data) => {
+      return require('jstransformer')(template).render(
         content,
         templateOptions,
-        ctx.meta.merged
-      )
-      ctx.writeContents(file, res.body)
+        data
+      ).body
+    }
+
+    let shouldSkip
+    if (skipInterpolation) {
+      skipInterpolation = Array.isArray(skipInterpolation)
+        ? skipInterpolation
+        : [skipInterpolation]
+      shouldSkip = filepath =>
+        skipInterpolation.some(condition => {
+          if (typeof condition === 'string' || Array.isArray(condition)) {
+            const matches = match(ctx.fileList, condition)
+            return matches.indexOf(filepath) >= 0
+          }
+          if (typeof condition === 'function') {
+            return condition(filepath)
+          }
+          return false
+        })
+    }
+
+    for (const filepath of ctx.fileList) {
+      const content = ctx.fileContents(filepath)
+
+      if (shouldSkip && shouldSkip(filepath, content)) {
+        continue
+      }
+
+      // Skip binary files
+      if (isBinaryPath(filepath)) {
+        continue
+      }
+
+      ctx.writeContents(filepath, render(content, ctx.meta.merged))
     }
   }
 }

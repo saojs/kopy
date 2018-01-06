@@ -150,7 +150,7 @@ In the above case, we will not run prompts to get answers from users, instead we
 
 ##### skipInterpolation
 
-Type: `string | Array<string> | function`<br>
+Type: `string | Array<string|function> | function`<br>
 Default: `undefined` (we skip all [binary files](https://github.com/sindresorhus/is-binary-path) by default)
 
 Patterns([minimatch](https://github.com/isaacs/minimatch#features)) used to skip interpolation, eg: `./foo*/bar-*.js`
