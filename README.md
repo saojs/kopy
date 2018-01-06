@@ -1,6 +1,6 @@
 # kopy
 
-[![NPM version](https://img.shields.io/npm/v/kopy.svg?style=flat)](https://npmjs.com/package/kopy) [![NPM downloads](https://img.shields.io/npm/dm/kopy.svg?style=flat)](https://npmjs.com/package/kopy) [![Build Status](https://img.shields.io/circleci/project/egoist/kopy/master.svg?style=flat)](https://circleci.com/gh/egoist/kopy)
+[![NPM version](https://img.shields.io/npm/v/kopy.svg?style=flat)](https://npmjs.com/package/kopy) [![NPM downloads](https://img.shields.io/npm/dm/kopy.svg?style=flat)](https://npmjs.com/package/kopy) [![Build Status](https://img.shields.io/circleci/project/saojs/kopy/master.svg?style=flat)](https://circleci.com/gh/saojs/kopy)
 
 > Gracefully copy a directory and render templates.
 
