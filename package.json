@@ -63,7 +63,11 @@
   "xo": {
     "extends": "rem/prettier",
     "rules": {
-      "guard-for-in": 0
-    }
+      "guard-for-in": 0,
+      "import/prefer-default-export": 0
+    },
+    "ignores": [
+      "test/fixture-*/**"
+    ]
   }
 }
