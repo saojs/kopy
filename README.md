@@ -261,6 +261,24 @@ Default: `true`
 
 Process files and write to disk.
 
+### stream
+
+The [majo](https://github.com/egoist/majo/blob/master/docs/api.md) instance.
+
+#### stream.meta
+
+##### stream.meta.answers
+
+Prompts answers.
+
+##### stream.meta.data
+
+The `data` you passed from `options`.
+
+##### stream.meta.merged
+
+Merged `answers` and `data`.
+
 ---
 
 **kopy** © [EGOIST](https://github.com/egoist), Released under the [MIT](https://egoist.mit-license.org/) License.<br>
