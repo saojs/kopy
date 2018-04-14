@@ -1,4 +1,4 @@
-import minimatch from 'minimatch'
+import match from 'micromatch'
 
 export default function(move) {
   return ctx => {
@@ -9,7 +9,7 @@ export default function(move) {
     if (!move) return
 
     for (const pattern in move) {
-      const matches = minimatch.match(ctx.fileList, pattern)
+      const matches = match.match(ctx.fileList, pattern)
       if (matches.length > 0) {
         const newName = move[pattern]
         if (typeof newName === 'function') {

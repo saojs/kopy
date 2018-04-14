@@ -1,4 +1,4 @@
-import match from 'multimatch'
+import match from 'micromatch'
 
 export default transforms => stream => {
   const globs = Object.keys(transforms)

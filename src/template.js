@@ -1,4 +1,4 @@
-import match from 'multimatch'
+import match from 'micromatch'
 import isBinaryPath from 'is-binary-path'
 import { arrify } from './utils'
 
