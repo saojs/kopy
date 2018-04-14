@@ -33,7 +33,7 @@ export default (
             return matches.indexOf(filepath) >= 0
           }
           if (typeof condition === 'function') {
-            return condition(filepath)
+            return condition(filepath, ctx)
           }
           return false
         })

@@ -159,7 +159,7 @@ It could also be a function, whose first arg is file path and second arg is file
 
 ```js
 copy(src, dest, {
-  skipInterpolation(file, content) {
+  skipInterpolation(file, stream) {
     return /\.js$/.test(file)
   }
 })
