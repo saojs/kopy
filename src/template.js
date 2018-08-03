@@ -15,10 +15,15 @@ export default (
         ? templateOptions(ctx.meta)
         : templateOptions
 
-    const render = (content, data) => {
+    const render = (absolutePath, content, data) => {
       return require('jstransformer')(template).render(
         content,
-        templateOptions,
+        Object.assign(
+          {
+            filename: absolutePath
+          },
+          templateOptions
+        ),
         data
       ).body
     }
@@ -51,7 +56,11 @@ export default (
         continue
       }
 
-      ctx.writeContents(filepath, render(content, ctx.meta.merged))
+      const absolutePath = ctx.files[filepath].path
+      ctx.writeContents(
+        filepath,
+        render(absolutePath, content, ctx.meta.merged)
+      )
     }
   }
 }
