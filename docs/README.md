@@ -1,6 +1,6 @@
 ![kopy](https://user-images.githubusercontent.com/8784712/50736257-172d9100-11f6-11e9-9408-36bbceab2011.png)
 
-_The backbone of a scaffodling tool._
+_The backbone of a scaffolding tool._
 
 ## Install
 
