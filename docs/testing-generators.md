@@ -18,8 +18,8 @@ test('it works', async () => {
   const answers = {
     name: 'kevin'
   }
-  const result = await generator.test(answers)
-  expect(result.fileList).toContain('index.js')
+  await generator.test(answers)
+  expect(generator.fileList).toContain('index.js')
 })
 ```
 
