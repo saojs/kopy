@@ -1,4 +1,4 @@
-const kopy = require('..')
+const kopy = require('../lib')
 
 test('simple', async () => {
   const generator = kopy({
