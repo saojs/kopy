@@ -4,7 +4,7 @@
 
 <br><br><br><br><br><br><br>
 
-[![NPM version](https://badgen.net/npm/v/kopy)](https://npmjs.com/package/kopy) [![NPM downloads](https://badgen.net/npm/dm/kopy)](https://npmjs.com/package/kopy) [![CircleCI](https://badgen.net/circleci/github/egoist/kopy/master)](https://circleci.com/gh/egoist/kopy/tree/master) [![donate](https://badgen.net/badge/support%20me/donate/ff69b4)](https://patreon.com/egoist) [![chat](https://badgen.net/badge/chat%20on/discord/7289DA)](https://chat.egoist.moe)
+[![NPM version](https://badgen.net/npm/v/kopy)](https://npmjs.com/package/kopy) [![NPM downloads](https://badgen.net/npm/dm/kopy)](https://npmjs.com/package/kopy) [![CircleCI](https://badgen.net/circleci/github/saojs/kopy/master)](https://circleci.com/gh/saojs/kopy/tree/master) [![donate](https://badgen.net/badge/support%20me/donate/ff69b4)](https://patreon.com/egoist) [![chat](https://badgen.net/badge/chat%20on/discord/7289DA)](https://chat.egoist.moe)
 
 ---
 
@@ -83,6 +83,6 @@ test('it works', async () => {
 ## Author
 
 **kopy** © EGOIST, Released under the [MIT](./LICENSE) License.<br>
-Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/kopy/contributors)).
+Authored and maintained by EGOIST with help from contributors ([list](https://github.com/saojs/kopy/contributors)).
 
 > [Website](https://egoist.sh) · GitHub [@EGOIST](https://github.com/egoist) · Twitter [@\_egoistlily](https://twitter.com/_egoistlily)

@@ -12,7 +12,7 @@
     "commit": "git-cz"
   },
   "repository": {
-    "url": "egoist/kopy",
+    "url": "saojs/kopy",
     "type": "git"
   },
   "author": "egoist<0x142857@gmail.com>",
