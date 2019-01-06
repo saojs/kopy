@@ -20,7 +20,7 @@ const config = {
         files: '**',
         cwd: '/path/to/templates',
         // When specified, transform the files with `ejs`
-        templateData: this.answers
+        data: this.answers
       }
     ]
   },
