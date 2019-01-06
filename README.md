@@ -10,6 +10,11 @@
 
 **The backbone of a scaffolding tool.**
 
+## Feature
+
+- Zero-dependency, very light-weight (980KB) compared to [Yeoman](https://packagephobia.now.sh/result?p=yeoman-generator) (12MB)
+- Ultra-simple, this module exists because writing Yeoman generator is hard and time-consuming
+
 ## Install
 
 ```bash
