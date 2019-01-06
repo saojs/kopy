@@ -116,8 +116,15 @@ interface Opts {
   cacheIdentifier?: string
   /** npm registry */
   registry?: string
+  extendConfigSchema?: (
+    schema: object,
+    struct: Struct,
+    superStruct: SuperStruct
+  ) => void
 }
 ```
+
+Check out [validateSchema.js](https://github.com/saojs/kopy/blob/master/lib/validateConfig.js) for the underlying schema we use to validate the config.
 
 ## generator.test
 
