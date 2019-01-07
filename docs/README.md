@@ -62,10 +62,10 @@ const kopy = require('kopy')
 
 test('it works', async () => {
   const generator = kopy(config)
-  const result = await generator.test({
+  await generator.test({
     // Prompt answers
     name: 'kevin'
   })
-  expect(result.fileList).toContain('index.js')
+  expect(generator.fileList).toContain('index.js')
 })
 ```
