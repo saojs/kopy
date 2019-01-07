@@ -14,6 +14,7 @@ yarn add kopy
 const kopy = require('kopy')
 
 const config = {
+  // Ask some questions!
   prompts() {
     return [
       {
@@ -23,10 +24,13 @@ const config = {
       }
     ]
   },
+  // Manipulate files with ease!
   actions() {
     return [
+      // Copy files from `templates` directory to output directory
       {
         type: 'copy',
+        // One or more glob patterns
         files: '**',
         cwd: '/path/to/templates',
         // When specified, transform the files with `ejs`
@@ -34,8 +38,11 @@ const config = {
       }
     ]
   },
+  // When we're done :)
   completed() {
-    console.log('Done!')
+    this.logger.success(`Generated into ${this.colors.underline(this.outDir)}`)
+    // Or simply:
+    // this.showSuccessTips()
   }
 }
 
@@ -56,6 +63,7 @@ const kopy = require('kopy')
 test('it works', async () => {
   const generator = kopy(config)
   const result = await generator.test({
+    // Prompt answers
     name: 'kevin'
   })
   expect(result.fileList).toContain('index.js')

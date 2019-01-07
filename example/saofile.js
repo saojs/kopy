@@ -37,6 +37,6 @@ module.exports = {
   async completed() {
     await this.npmInstall()
     await this.gitInit({ commit: true })
-    this.logger.success('Done!')
+    this.showSuccessTips()
   }
 }
