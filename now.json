@@ -15,6 +15,7 @@
     },
     {
       "src": "^/(.+)\\.(.+)",
+      "headers": { "cache-control": "s-maxage=0" },
       "dest": "/docs/$1.$2"
     },
     {
