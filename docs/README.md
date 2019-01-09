@@ -52,7 +52,7 @@ generator
   .run({
     outDir: './out'
   })
-  .catch(generator.handleError)
+  .catch(kopy.handleError)
 ```
 
 Testing:
