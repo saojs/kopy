@@ -136,7 +136,7 @@ Emulate running the generator.
 
 - Type: `(prompt: enquirer.prompt) => void`
 
-By default, running `generator.emulate()` will emulate using the initial values for prompts, the `emulator` it uses looks like:
+By default, running `generator.emulate()` will emulate using the default values for prompts, the `emulator` it uses looks like:
 
 ```js
 const defaultEmulator = prompt => {

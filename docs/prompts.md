@@ -1,6 +1,9 @@
 # Prompts
 
-Check out the documentation for [prompts](https://github.com/enquirer/enquirer#prompt-options) in Enquirer.
+The prompt object is mostly compatiable with [Inquirer.js](https://github.com/SBoudrias/Inquirer.js/) with some exceptions:
+
+- NOT supports `rawlist`, `expand`, `editor` prompts.
+- NOT supports separator.
 
 We also have a few addtional prompt options listed below.
 

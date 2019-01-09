@@ -7,7 +7,7 @@ test('simple', async () => {
         name: 'name',
         type: 'input',
         message: 'what is your name',
-        initial: 'kevin'
+        default: 'kevin'
       }
     ]
   })
