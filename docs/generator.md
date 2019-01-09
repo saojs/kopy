@@ -126,18 +126,22 @@ interface Opts {
 
 Check out [validateSchema.js](https://github.com/saojs/kopy/blob/master/lib/validateConfig.js) for the underlying schema we use to validate the config.
 
-## generator.test
+## generator.emulate
 
-- Type: `(answers: Answers) => Promise<void>`
+- Type: `(emulator?: Emulator) => Promise<void>`
 
-Run the generator in test mode.
+Emulate running the generator.
 
-### answers
+### emulator
 
-- Type: `any[]` `{[name: string]: any}` `boolean`
+- Type: `(prompt: enquirer.prompt) => void`
 
-Set it to `true` to use inject initial value to prompts.
+By default, running `generator.emulate()` will emulate using the initial values for prompts, the `emulator` it uses looks like:
 
-Or an array with values to inject.
-
-Or an object whose entry is prompt name.
+```js
+const defaultEmulator = prompt => {
+  prompt.on('prompt', prompt => {
+    prompt.submit()
+  })
+}
+```

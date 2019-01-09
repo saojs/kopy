@@ -7,7 +7,7 @@ const config = {
   prompts() {
     return [
       {
-        type: 'text',
+        type: 'input',
         name: 'name',
         message: 'what is your name'
       }

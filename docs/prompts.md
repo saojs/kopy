@@ -1,6 +1,8 @@
 # Prompts
 
-Kopy prompts are a superset of [prompts](https://github.com/terkelg/prompts), we have following addtional properties.
+Check out the documentation for [prompts](https://github.com/enquirer/enquirer#prompt-options) in Enquirer.
+
+We also have a few addtional prompt options listed below.
 
 ## cache
 

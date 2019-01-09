@@ -18,7 +18,7 @@ const config = {
   prompts() {
     return [
       {
-        type: 'text',
+        type: 'input',
         name: 'name',
         message: 'what is your name'
       }
@@ -62,10 +62,7 @@ const kopy = require('kopy')
 
 test('it works', async () => {
   const generator = kopy(config)
-  await generator.test({
-    // Prompt answers
-    name: 'kevin'
-  })
-  expect(generator.fileList).toContain('index.js')
+  await generator.emulate()
+  expect(generator.answers).toEqual({ name: '' })
 })
 ```

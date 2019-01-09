@@ -4,5 +4,5 @@ const kopy = require('../lib')
 const generator = kopy(require('./saofile'))
 
 generator
-  .run({ outDir: path.join(__dirname, 'dist'), injectAnswers: true })
+  .run({ outDir: path.join(__dirname, 'dist') })
   .catch(generator.handleError)

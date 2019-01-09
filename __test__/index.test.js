@@ -5,13 +5,13 @@ test('simple', async () => {
     prompts: [
       {
         name: 'name',
-        type: 'text',
+        type: 'input',
         message: 'what is your name',
         initial: 'kevin'
       }
     ]
   })
-  await generator.test()
+  await generator.emulate()
   expect(generator.answers).toEqual({
     name: 'kevin'
   })
