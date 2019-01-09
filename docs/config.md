@@ -1,5 +1,11 @@
 # Config
 
+## config.description
+
+- Type: `string`
+
+Generator description.
+
 ## config.prompts
 
 - Type: `Array<Prompt> | (this: Generator) => Array<Prompt>`
