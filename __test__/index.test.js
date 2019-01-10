@@ -5,14 +5,20 @@ test('simple', async () => {
     prompts: [
       {
         name: 'name',
-        type: 'input',
         message: 'what is your name',
         default: 'kevin'
+      },
+      {
+        name: 'gender',
+        message: 'select your gender',
+        choices: ['male', 'female'],
+        initial: 'female'
       }
     ]
   })
   await generator.emulate()
   expect(generator.answers).toEqual({
-    name: 'kevin'
+    name: 'kevin',
+    gender: 'female'
   })
 })
