@@ -1,3 +1,7 @@
+# Deprecated, I'm rewriting this..
+
+
+
 <br><br><br><br><br><br><br>
 
 ![kopy 1](https://user-images.githubusercontent.com/8784712/50736257-172d9100-11f6-11e9-9408-36bbceab2011.png)
