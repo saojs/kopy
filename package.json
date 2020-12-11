@@ -33,7 +33,7 @@
     "eslint-config-rem": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "husky": "^1.0.0-rc.13",
-    "ini": "1.3.5",
+    "ini": "1.3.6",
     "is-binary-path": "2.0.0",
     "jest": "^23.6.0",
     "jstransformer": "1.0.0",
